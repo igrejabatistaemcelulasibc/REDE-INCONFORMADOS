@@ -1,10 +1,240 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Título</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inscrição – Acamp Jovem</title>
+
+<style>
+:root{
+  --primary:#1f7a63;
+  --bg:#f4f6f5;
+}
+
+*{box-sizing:border-box;font-family:Inter,Arial,sans-serif}
+body{margin:0;background:var(--bg);}
+
+main{
+  max-width:900px;
+  margin:40px auto;
+  background:#fff;
+  padding:32px;
+  border-radius:20px;
+}
+
+.step{display:none}
+.step.active{display:block}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+
+@media(max-width:700px){
+  .grid{grid-template-columns:1fr}
+}
+
+input,select,textarea{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #ccc;
+}
+
+textarea{min-height:120px}
+
+.actions{
+  display:flex;
+  justify-content:space-between;
+  margin-top:30px;
+}
+
+button{
+  background:var(--primary);
+  color:#fff;
+  border:none;
+  padding:14px 24px;
+  border-radius:12px;
+  cursor:pointer;
+}
+
+button.secondary{background:#ccc;color:#000}
+
+#loading{
+  position:fixed;
+  inset:0;
+  background:rgba(255,255,255,.9);
+  display:none;
+  align-items:center;
+  justify-content:center;
+}
+
+.success{text-align:center}
+</style>
 </head>
+
 <body>
-  <h1>Meu título</h1>
+
+<main>
+
+<form id="form">
+
+<!-- STEP 1 -->
+<section class="step active">
+<h2>Identificação</h2>
+<div class="grid">
+<input name="nome" placeholder="Nome completo" required>
+<input type="date" name="nascimento" required>
+<input name="idade" placeholder="Idade" required>
+<input name="sexo" placeholder="Sexo" required>
+<input name="igreja" placeholder="Igreja" required>
+<input name="telefone" placeholder="Telefone" required>
+<input name="cidade" placeholder="Cidade" required>
+<input name="convidado" placeholder="Quem convidou">
+</div>
+<div class="actions">
+<span></span>
+<button type="button" onclick="next()">Continuar</button>
+</div>
+</section>
+
+<!-- STEP 2 -->
+<section class="step">
+<h2>Responsável</h2>
+<div class="grid">
+<input name="responsavelNome" placeholder="Nome do responsável" required>
+<input name="responsavelParentesco" placeholder="Parentesco" required>
+<input name="responsavelTelefone" placeholder="Telefone" required>
+<input name="responsavelEmergencia" placeholder="Emergência" required>
+<select name="autorizacaoResponsavel" required>
+<option value="">Autoriza?</option>
+<option>Sim</option>
+<option>Não</option>
+</select>
+</div>
+<div class="actions">
+<button type="button" class="secondary" onclick="back()">Voltar</button>
+<button type="button" onclick="next()">Continuar</button>
+</div>
+</section>
+
+<!-- STEP 3 -->
+<section class="step">
+<h2>Saúde</h2>
+<div class="grid">
+<input name="alergia" placeholder="Possui alergia?">
+<input name="alergiaDescricao" placeholder="Qual alergia?">
+<input name="restricao" placeholder="Restrição alimentar?">
+<input name="restricaoDescricao" placeholder="Qual restrição?">
+<input name="medicamento" placeholder="Usa medicamento?">
+<input name="medicamentoDescricao" placeholder="Qual medicamento?">
+<input name="condicao" placeholder="Condição de saúde">
+<input name="reacao" placeholder="Reação em emergência">
+<input name="tipoSanguineo" placeholder="Tipo sanguíneo">
+<input name="planoSaude" placeholder="Plano de saúde">
+</div>
+<div class="actions">
+<button type="button" class="secondary" onclick="back()">Voltar</button>
+<button type="button" onclick="next()">Continuar</button>
+</div>
+</section>
+
+<!-- STEP 4 -->
+<section class="step">
+<h2>Emergência e Logística</h2>
+<div class="grid">
+<input name="contatoEmergenciaNome" placeholder="Contato emergência">
+<input name="contatoEmergenciaParentesco" placeholder="Parentesco">
+<input name="contatoEmergenciaTelefone" placeholder="Telefone emergência">
+<select name="transporte" required>
+<option value="">Como irá?</option>
+<option>Preciso de carona</option>
+<option>Carro próprio / responsável</option>
+<option>Outro</option>
+</select>
+</div>
+
+<br>
+
+<label><input type="checkbox" name="autImagem" value="Sim" required> Autorizo uso de imagem</label><br>
+<label><input type="checkbox" name="autMedica" value="Sim" required> Autorizo atendimento médico</label><br>
+<label><input type="checkbox" name="declaracao" value="Sim" required> Declaro informações verdadeiras</label><br>
+<label><input type="checkbox" name="regras" value="Sim" required> Estou ciente das regras</label>
+
+<br><br>
+
+<textarea name="observacoes" placeholder="Observações importantes"></textarea>
+
+<div class="actions">
+<button type="button" class="secondary" onclick="back()">Voltar</button>
+<button type="button" onclick="next()">Continuar</button>
+</div>
+</section>
+
+<!-- STEP 5 -->
+<section class="step">
+<h2>Comprovante</h2>
+<input type="file" id="file" required>
+<div class="actions">
+<button type="button" class="secondary" onclick="back()">Voltar</button>
+<button type="submit">Finalizar inscrição</button>
+</div>
+</section>
+
+</form>
+
+<section class="step success">
+<h2>Inscrição concluída</h2>
+<p>Entre no grupo do WhatsApp:</p>
+<a href="https://chat.whatsapp.com/SEU-LINK-AQUI" target="_blank">
+Entrar no grupo
+</a>
+</section>
+
+</main>
+
+<div id="loading"><h3>Enviando… aguarde</h3></div>
+
+<script>
+const SCRIPT_URL = "COLE_AQUI_SUA_URL_DO_APPS_SCRIPT";
+
+let step = 0;
+const steps = document.querySelectorAll(".step");
+
+function update(){
+  steps.forEach((s,i)=>s.classList.toggle("active",i===step));
+}
+
+function next(){step++;update()}
+function back(){step--;update()}
+
+document.getElementById("form").addEventListener("submit",e=>{
+  e.preventDefault();
+  document.getElementById("loading").style.display="flex";
+
+  const data = Object.fromEntries(new FormData(e.target));
+  const file = document.getElementById("file").files[0];
+
+  const reader = new FileReader();
+  reader.onload = async ()=>{
+    data.comprovanteBase64 = reader.result.split(",")[1];
+    data.comprovanteTipo = file.type;
+    data.comprovanteNome = file.name;
+
+    await fetch(SCRIPT_URL,{
+      method:"POST",
+      body:JSON.stringify(data)
+    });
+
+    document.getElementById("loading").style.display="none";
+    step++;
+    update();
+  };
+
+  reader.readAsDataURL(file);
+});
+</script>
+
 </body>
 </html>
