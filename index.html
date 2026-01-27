@@ -168,6 +168,20 @@ button.secondary{
   text-decoration:none;
   font-weight:700;
 }
+  
+  .date-field{
+  position:relative;
+}
+.date-field::after{
+  content:"";
+  position:absolute;
+  right:16px;
+  top:50%;
+  transform:translateY(-50%);
+  pointer-events:none;
+  opacity:.6;
+}
+
 </style>
 </head>
 
@@ -181,22 +195,53 @@ button.secondary{
 
 <!-- IDENTIFICAÇÃO -->
 <div class="step active">
-<h3>Inscrição - ACAMP JOVEM IBC</h3>
-<div class="grid">
-<input name="Nome" placeholder="Nome completo" required>
-<input type="date" name="Nascimento" required>
-<input name="Idade" placeholder="Idade" required>
-<input name="Sexo" placeholder="Sexo" required>
-<input name="Igreja" placeholder="Igreja / Congregação" required>
-<input name="TelefoneParticipante" placeholder="Telefone" required>
-<input name="Cidade" placeholder="Cidade / Bairro" required>
-<input name="ConvidadoPor" placeholder="Quem convidou">
+  <h3>Inscrição - ACAMP JOVEM IBC</h3>
+
+  <div class="grid">
+    <input name="Nome" placeholder="Nome completo" required>
+
+    <div class="date-field">
+      <label>Data de nascimento</label>
+      <input type="date" name="Nascimento" required>
+    </div>
+
+    <input name="Idade" placeholder="Idade" required>
+    <input name="Sexo" placeholder="Sexo" required>
+    <input name="Igreja" placeholder="Igreja / Congregação" required>
+    <input name="TelefoneParticipante" placeholder="Telefone" required>
+    <input name="Cidade" placeholder="Cidade / Bairro" required>
+    <input name="ConvidadoPor" placeholder="Quem convidou">
+  </div>
+
+  <div class="actions">
+    <span></span>
+    <button type="button" onclick="next()">Continuar</button>
+  </div>
 </div>
-<div class="actions">
-<span></span>
-<button type="button" onclick="next()">Continuar</button>
+
+<!-- RESPONSÁVEL -->
+<div class="step">
+  <h3>Responsável Legal</h3>
+
+  <div class="grid">
+    <input name="ResponsavelNome" placeholder="Nome do responsável">
+    <input name="ResponsavelParentesco" placeholder="Parentesco">
+    <input name="ResponsavelTelefone" placeholder="Telefone">
+    <input name="ResponsavelEmergencia" placeholder="Telefone emergência">
+
+    <select name="AutorizacaoResponsavel">
+      <option value="">Autoriza participação?</option>
+      <option value="Sim">Sim</option>
+      <option value="Não">Não</option>
+    </select>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="secondary" onclick="back()">Voltar</button>
+    <button type="button" onclick="next()">Continuar</button>
+  </div>
 </div>
-</div>
+
 
 <!-- RESPONSÁVEL -->
 <div class="step">
@@ -266,7 +311,7 @@ button.secondary{
 <div class="step">
 <h3>Pagamento – PIX</h3>
 <p>Valor: <strong>R$ 50,00</strong></p>
-<input id="pixKey" value="39.952.787/0001=27" readonly>
+<input id="pixKey" value="39.952.787/0001-27" readonly>
 <button type="button" onclick="copiarPix()">Copiar chave PIX</button>
 <div class="actions">
 <button type="button" class="secondary" onclick="back()">Voltar</button>
