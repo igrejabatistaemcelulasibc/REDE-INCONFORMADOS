@@ -39,7 +39,7 @@ main{
   backdrop-filter:blur(10px);
 }
 
-h2,h3{
+h3{
   font-family:Poppins,sans-serif;
   margin:0 0 24px;
 }
@@ -168,35 +168,6 @@ button.secondary{
   text-decoration:none;
   font-weight:700;
 }
-  
-  .date-field{
-  position:relative;
-}
-.date-field::after{
-  content:"";
-  position:absolute;
-  right:16px;
-  top:50%;
-  transform:translateY(-50%);
-  pointer-events:none;
-  opacity:.6;
-}
-  
-.date-field{ grid-column:1 / -1; }
-input, select, textarea { min-width: 0; }
-
-/* CORREÇÃO REAL PARA INPUT DATE NO MOBILE */
-input[type="date"]{
-  display:block;
-  width:100%;
-  max-width:100%;
-  box-sizing:border-box;
-  -webkit-appearance:none;
-  appearance:none;
-}
-
-
-
 </style>
 </head>
 
@@ -215,9 +186,14 @@ input[type="date"]{
   <div class="grid">
     <input name="Nome" placeholder="Nome completo" required>
 
-    <div class="date-field">
+    <div>
       <label>Data de nascimento</label>
-      <input type="date" name="Nascimento" required>
+      <input 
+        type="text" 
+        name="Nascimento" 
+        placeholder="DD/MM/AAAA" 
+        inputmode="numeric"
+        required>
     </div>
 
     <input name="Idade" placeholder="Idade" required>
@@ -255,27 +231,6 @@ input[type="date"]{
     <button type="button" class="secondary" onclick="back()">Voltar</button>
     <button type="button" onclick="next()">Continuar</button>
   </div>
-</div>
-
-
-<!-- RESPONSÁVEL -->
-<div class="step">
-<h3>Responsável Legal</h3>
-<div class="grid">
-<input name="ResponsavelNome" placeholder="Nome do responsável">
-<input name="ResponsavelParentesco" placeholder="Parentesco">
-<input name="ResponsavelTelefone" placeholder="Telefone">
-<input name="ResponsavelEmergencia" placeholder="Telefone emergência">
-<select name="AutorizacaoResponsavel">
-<option value="">Autoriza participação?</option>
-<option value="Sim">Sim</option>
-<option value="Não">Não</option>
-</select>
-</div>
-<div class="actions">
-<button type="button" class="secondary" onclick="back()">Voltar</button>
-<button type="button" onclick="next()">Continuar</button>
-</div>
 </div>
 
 <!-- SAÚDE -->
