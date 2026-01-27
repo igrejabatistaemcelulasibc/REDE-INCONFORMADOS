@@ -4,272 +4,367 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Inscrição – Acamp Jovem</title>
-
 <style>
-:root{--primary:#1f7a63}
-*{box-sizing:border-box;font-family:Inter,Arial,sans-serif}
-body{margin:0;background:linear-gradient(120deg,#e9f5f1,#fff);color:#222}
-header{background:#fff;padding:16px 24px;box-shadow:0 4px 20px rgba(0,0,0,.06)}
-main{max-width:900px;margin:40px auto;background:#fff;border-radius:20px;padding:32px;box-shadow:0 30px 60px rgba(0,0,0,.08);position:relative}
-
-.progress{height:6px;background:#eee;border-radius:99px;overflow:hidden;margin-bottom:24px}
-.progress div{height:100%;width:0;background:var(--primary);transition:.3s}
-
-.step{position:absolute;inset:0;opacity:0;pointer-events:none;transition:.3s}
-.step.active{position:relative;opacity:1;pointer-events:auto}
-
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media(max-width:700px){.grid{grid-template-columns:1fr}}
-
-input,select,textarea{
-  width:100%;
-  padding:12px;
-  border-radius:10px;
-  border:1px solid #ddd;
+:root {
+  --primary: #52b788;     /* Verde claro vivo */
+  --dark: #0d1b2a;        /* Azul escuro */
+  --light: #f8f9fa;
+  --gray: #e9ecef;
+  --text: #212529;
 }
-textarea{min-height:100px}
 
-.checkbox-group label{
-  display:flex;
-  align-items:flex-start;
-  gap:10px;
-  line-height:1.4;
-  margin-bottom:12px;
-}
-.checkbox-group input{margin-top:4px}
+* { box-sizing: border-box; font-family: 'Segoe UI', Inter, Arial, sans-serif; }
+body { margin:0; background: var(--light); color: var(--text); line-height: 1.6; }
 
-.actions{display:flex;justify-content:space-between;margin-top:32px}
+.navbar {
+  background: var(--dark);
+  color: white;
+  padding: 16px 5%;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-button{
-  background:var(--primary);
-  color:#fff;
-  border:none;
-  padding:14px 24px;
-  border-radius:12px;
-  cursor:pointer;
+.navbar .logo {
+  font-size: 1.6rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
-button.secondary{background:#ccc;color:#000}
 
-#loading{
-  position:fixed;
-  inset:0;
-  background:rgba(255,255,255,.9);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:999;
+.navbar .logo img {
+  height: 48px;
+  border-radius: 8px;
 }
-.spinner{
-  width:40px;height:40px;
-  border:4px solid #ddd;
-  border-top:4px solid var(--primary);
-  border-radius:50%;
-  animation:spin 1s linear infinite;
-}
-@keyframes spin{to{transform:rotate(360deg)}}
 
-#successScreen{text-align:center;display:none}
-#successScreen a{
-  display:inline-block;
-  margin-top:20px;
-  background:#25D366;
-  color:#fff;
-  padding:14px 24px;
-  border-radius:12px;
-  text-decoration:none;
-  font-weight:600;
+.hero {
+  background: linear-gradient(rgba(13,27,42,0.65), rgba(13,27,42,0.45)), url('https://images.unsplash.com/photo-1522202176988-66273c2b033f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding: 140px 5% 100px;
+  margin-top: 80px; /* espaço para navbar fixa */
 }
+
+.hero h1 { font-size: 3.2rem; margin: 0 0 16px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+.hero p { font-size: 1.3rem; max-width: 800px; margin: 0 auto; }
+
+.event-info {
+  background: white;
+  padding: 40px 5%;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  margin: -60px auto 40px;
+  max-width: 1100px;
+  border-radius: 16px;
+  position: relative;
+  z-index: 10;
+}
+
+.event-info h2 { color: var(--dark); margin-bottom: 24px; }
+.event-info .details { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; font-size: 1.1rem; }
+.event-info .details div { background: var(--gray); padding: 20px 32px; border-radius: 12px; min-width: 220px; }
+
+main {
+  max-width: 960px;
+  margin: 40px auto;
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+}
+
+.progress { height: 8px; background: var(--gray); border-radius: 99px; overflow: hidden; margin: 32px 0; }
+.progress div { height: 100%; width: 0; background: var(--primary); transition: width .4s ease; }
+
+.step { position: absolute; inset: 0; opacity: 0; pointer-events: none; transition: opacity .4s; }
+.step.active { position: relative; opacity: 1; pointer-events: auto; }
+
+h2 { color: var(--dark); margin-bottom: 24px; }
+
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media(max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+
+input, select, textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid #ced4da;
+  font-size: 1rem;
+  transition: border-color .2s;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+textarea { min-height: 120px; }
+
+.checkbox-group label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-size: 1rem;
+}
+.checkbox-group input { margin-top: 6px; }
+
+.actions { display: flex; justify-content: space-between; margin-top: 40px; gap: 16px; }
+button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: background .2s;
+}
+button:hover { background: #40916c; }
+button.secondary { background: #6c757d; color: white; }
+button.secondary:hover { background: #5a6268; }
+
+#loading {
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.95);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.spinner {
+  width: 50px; height: 50px;
+  border: 5px solid var(--gray);
+  border-top: 5px solid var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+#successScreen { text-align: center; display: none; padding: 60px 20px; }
+#successScreen h2 { color: var(--dark); }
+#successScreen a {
+  display: inline-block;
+  margin-top: 24px;
+  background: #25D366;
+  color: white;
+  padding: 16px 40px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.map-container { margin-top: 32px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
 </style>
 </head>
-
 <body>
 
-<header>
-  <h2>Acamp Jovem – Inscrição</h2>
-</header>
+<nav class="navbar">
+  <div class="logo">
+    <img src="https://images.unsplash.com/photo-1505455184862-554165e5f6ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Logo Acamp Jovem">
+    Acamp Jovem
+  </div>
+</nav>
+
+<div class="hero">
+  <h1>Acamp Jovem 2026</h1>
+  <p>Uma experiência transformadora de fé, amizade e aventura!</p>
+</div>
+
+<div class="event-info">
+  <h2>Informações do Evento</h2>
+  <div class="details">
+    <div><strong>Data:</strong><br>14 a 16 de fevereiro de 2026</div>
+    <div><strong>Horário:</strong><br>Início: Sexta 18h | Término: Domingo 14h</div>
+    <div><strong>Local:</strong><br>Chácara / Clube em Palmas, TO</div>
+  </div>
+  <div class="map-container">
+    <!-- Substitua pelo embed real do local do evento -->
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3922.000000000000!2d-48.360000000000!3d-10.240000000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDE0JzI0LjAiUyA0OMKwMjEnMzYuMCJX!5e0!3m2!1spt-BR!2sbr!4v9999999999999" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+</div>
 
 <main>
+  <div class="progress"><div id="bar"></div></div>
+  
+  <form id="form" novalidate>
+    <!-- IDENTIFICAÇÃO -->
+    <section class="step active">
+      <h2>Identificação</h2>
+      <div class="grid">
+        <input name="Nome" placeholder="Nome completo" required>
+        <input type="date" name="Nascimento" required>
+        <input name="Idade" placeholder="Idade" required>
+        <input name="Sexo" placeholder="Sexo" required>
+        <input name="Igreja" placeholder="Igreja / Congregação" required>
+        <input name="TelefoneParticipante" placeholder="Telefone" required>
+        <input name="Cidade" placeholder="Cidade / Bairro" required>
+        <input name="ConvidadoPor" placeholder="Quem convidou">
+      </div>
+      <div class="actions">
+        <span></span>
+        <button type="button" onclick="next()">Continuar</button>
+      </div>
+    </section>
 
-<div class="progress"><div id="bar"></div></div>
+    <!-- As demais sections permanecem IDENTICAS -->
+    <!-- RESPONSÁVEL -->
+    <section class="step">
+      <h2>Responsável Legal</h2>
+      <div class="grid">
+        <input name="ResponsavelNome" placeholder="Nome do responsável">
+        <input name="ResponsavelParentesco" placeholder="Parentesco">
+        <input name="ResponsavelTelefone" placeholder="Telefone">
+        <input name="ResponsavelEmergencia" placeholder="Telefone emergência">
+        <select name="AutorizacaoResponsavel">
+          <option value="">Autoriza participação?</option>
+          <option value="Sim">Sim</option>
+          <option value="Não">Não</option>
+        </select>
+      </div>
+      <div class="actions">
+        <button type="button" class="secondary" onclick="back()">Voltar</button>
+        <button type="button" onclick="next()">Continuar</button>
+      </div>
+    </section>
 
-<form id="form" novalidate>
+    <!-- SAÚDE -->
+    <section class="step">
+      <h2>Saúde</h2>
+      <div class="grid">
+        <input name="Alergia" placeholder="Possui alergia?">
+        <input name="AlergiaDescricao" placeholder="Qual alergia?">
+        <input name="RestricaoAlimentar" placeholder="Restrição alimentar?">
+        <input name="RestricaoDescricao" placeholder="Qual restrição?">
+        <input name="Medicamento" placeholder="Usa medicamento contínuo?">
+        <input name="MedicamentoDescricao" placeholder="Qual medicamento?">
+        <input name="CondicaoSaude" placeholder="Condição de saúde">
+        <input name="TipoSanguineo" placeholder="Tipo sanguíneo">
+      </div>
+      <div class="actions">
+        <button type="button" class="secondary" onclick="back()">Voltar</button>
+        <button type="button" onclick="next()">Continuar</button>
+      </div>
+    </section>
 
-<!-- IDENTIFICAÇÃO -->
-<section class="step active">
-<h2>Identificação</h2>
-<div class="grid">
-<input name="Nome" placeholder="Nome completo" required>
-<input type="date" name="Nascimento" required>
-<input name="Idade" placeholder="Idade" required>
-<input name="Sexo" placeholder="Sexo" required>
-<input name="Igreja" placeholder="Igreja / Congregação" required>
-<input name="TelefoneParticipante" placeholder="Telefone" required>
-<input name="Cidade" placeholder="Cidade / Bairro" required>
-<input name="ConvidadoPor" placeholder="Quem convidou">
-</div>
-<div class="actions">
-<span></span>
-<button type="button" onclick="next()">Continuar</button>
-</div>
-</section>
+    <!-- LOGÍSTICA E AUTORIZAÇÕES -->
+    <section class="step">
+      <h2>Logística e Autorizações</h2>
+      <select name="logistica_transporte" required>
+        <option value="">Como irá ao local?</option>
+        <option value="Preciso de carona">Preciso de carona</option>
+        <option value="Carro próprio / responsável">Carro próprio / responsável</option>
+        <option value="Outro">Outro</option>
+      </select>
+      <br><br>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="autorizacao_imagem" value="Sim" required> Autorizo uso de imagem</label>
+        <label><input type="checkbox" name="autorizacao_medica" value="Sim" required> Autorizo atendimento médico</label>
+        <label><input type="checkbox" name="declaracao_verdade" value="Sim" required> Declaro informações verdadeiras</label>
+        <label><input type="checkbox" name="ciente_regras" value="Sim" required> Estou ciente das regras</label>
+      </div>
+      <textarea name="observacoes" placeholder="Observações importantes"></textarea>
+      <div class="actions">
+        <button type="button" class="secondary" onclick="back()">Voltar</button>
+        <button type="button" onclick="next()">Continuar</button>
+      </div>
+    </section>
 
-<!-- RESPONSÁVEL -->
-<section class="step">
-<h2>Responsável Legal</h2>
-<div class="grid">
-<input name="ResponsavelNome" placeholder="Nome do responsável">
-<input name="ResponsavelParentesco" placeholder="Parentesco">
-<input name="ResponsavelTelefone" placeholder="Telefone">
-<input name="ResponsavelEmergencia" placeholder="Telefone emergência">
-<select name="AutorizacaoResponsavel">
-<option value="">Autoriza participação?</option>
-<option value="Sim">Sim</option>
-<option value="Não">Não</option>
-</select>
-</div>
-<div class="actions">
-<button type="button" class="secondary" onclick="back()">Voltar</button>
-<button type="button" onclick="next()">Continuar</button>
-</div>
-</section>
+    <!-- PIX -->
+    <section class="step">
+      <h2>Pagamento – PIX</h2>
+      <p><strong>Valor:</strong> R$ 100,00</p>
+      <label>Chave PIX</label>
+      <input id="pixKey" value="SUA_CHAVE_PIX_AQUI" readonly>
+      <button type="button" onclick="copiarPix()" style="margin-top:12px; background:#40916c;">
+        📋 Copiar chave PIX
+      </button>
+      <p id="pixMsg" style="display:none;color:var(--primary);margin-top:12px;font-weight:bold;">
+        Chave PIX copiada com sucesso ✅
+      </p>
+      <div class="actions">
+        <button type="button" class="secondary" onclick="back()">Voltar</button>
+        <button type="button" onclick="next()">Já paguei</button>
+      </div>
+    </section>
 
-<!-- SAÚDE -->
-<section class="step">
-<h2>Saúde</h2>
-<div class="grid">
-<input name="Alergia" placeholder="Possui alergia?">
-<input name="AlergiaDescricao" placeholder="Qual alergia?">
-<input name="RestricaoAlimentar" placeholder="Restrição alimentar?">
-<input name="RestricaoDescricao" placeholder="Qual restrição?">
-<input name="Medicamento" placeholder="Usa medicamento contínuo?">
-<input name="MedicamentoDescricao" placeholder="Qual medicamento?">
-<input name="CondicaoSaude" placeholder="Condição de saúde">
-<input name="TipoSanguineo" placeholder="Tipo sanguíneo">
-</div>
-<div class="actions">
-<button type="button" class="secondary" onclick="back()">Voltar</button>
-<button type="button" onclick="next()">Continuar</button>
-</div>
-</section>
+    <!-- COMPROVANTE -->
+    <section class="step">
+      <h2>Enviar comprovante</h2>
+      <input type="file" id="file" required>
+      <div class="actions">
+        <button type="button" class="secondary" onclick="back()">Voltar</button>
+        <button type="submit">Finalizar inscrição</button>
+      </div>
+    </section>
+  </form>
 
-<!-- LOGÍSTICA E AUTORIZAÇÕES -->
-<section class="step">
-<h2>Logística e Autorizações</h2>
-
-<select name="logistica_transporte" required>
-<option value="">Como irá ao local?</option>
-<option value="Preciso de carona">Preciso de carona</option>
-<option value="Carro próprio / responsável">Carro próprio / responsável</option>
-<option value="Outro">Outro</option>
-</select>
-
-<br><br>
-
-<div class="checkbox-group">
-<label><input type="checkbox" name="autorizacao_imagem" value="Sim" required> Autorizo uso de imagem</label>
-<label><input type="checkbox" name="autorizacao_medica" value="Sim" required> Autorizo atendimento médico</label>
-<label><input type="checkbox" name="declaracao_verdade" value="Sim" required> Declaro informações verdadeiras</label>
-<label><input type="checkbox" name="ciente_regras" value="Sim" required> Estou ciente das regras</label>
-</div>
-
-<textarea name="observacoes" placeholder="Observações importantes"></textarea>
-
-<div class="actions">
-<button type="button" class="secondary" onclick="back()">Voltar</button>
-<button type="button" onclick="next()">Continuar</button>
-</div>
-</section>
-
-<!-- PIX -->
-<section class="step">
-<h2>Pagamento – PIX</h2>
-<p><strong>Valor:</strong> R$ 100,00</p>
-
-<label>Chave PIX</label>
-<input id="pixKey" value="SUA_CHAVE_PIX_AQUI" readonly>
-
-<button type="button" onclick="copiarPix()" style="margin-top:10px">
-📋 Copiar chave PIX
-</button>
-
-<p id="pixMsg" style="display:none;color:green;margin-top:10px">
-Chave PIX copiada com sucesso ✅
-</p>
-
-<div class="actions">
-<button type="button" class="secondary" onclick="back()">Voltar</button>
-<button type="button" onclick="next()">Já paguei</button>
-</div>
-</section>
-
-<!-- COMPROVANTE -->
-<section class="step">
-<h2>Enviar comprovante</h2>
-<input type="file" id="file" required>
-<div class="actions">
-<button type="button" class="secondary" onclick="back()">Voltar</button>
-<button type="submit">Finalizar inscrição</button>
-</div>
-</section>
-
-</form>
-
-<div id="successScreen">
-<h2>Inscrição concluída com sucesso 🎉</h2>
-<p>Entre no grupo oficial do WhatsApp:</p>
-<a href="https://chat.whatsapp.com/FwddVr1MnyZ7LGlCYWPrsL?mode=gi_t" target="_blank">
-Entrar no grupo do WhatsApp
-</a>
-</div>
-
+  <div id="successScreen">
+    <h2>Inscrição concluída com sucesso 🎉</h2>
+    <p>Entre no grupo oficial do WhatsApp:</p>
+    <a href="https://chat.whatsapp.com/FwddVr1MnyZ7LGlCYWPrsL?mode=gi_t" target="_blank">
+      Entrar no grupo do WhatsApp
+    </a>
+  </div>
 </main>
 
 <div id="loading"><div class="spinner"></div></div>
 
 <script>
-const SCRIPT_URL="https://script.google.com/macros/s/AKfycbyhcUoeIShSmNFv0HNQiNsFwxHTOggHjdZ54Jryv7_RLvwCCj-JB2lNiDocPMa5dzeg/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyhcUoeIShSmNFv0HNQiNsFwxHTOggHjdZ54Jryv7_RLvwCCj-JB2lNiDocPMa5dzeg/exec";
+let step = 0;
+const steps = document.querySelectorAll(".step");
+const bar = document.getElementById("bar");
 
-let step=0;
-const steps=document.querySelectorAll(".step");
-const bar=document.getElementById("bar");
-
-function update(){
-  steps.forEach((s,i)=>s.classList.toggle("active",i===step));
-  bar.style.width=(step/(steps.length-1))*100+"%";
+function update() {
+  steps.forEach((s, i) => s.classList.toggle("active", i === step));
+  bar.style.width = (step / (steps.length - 1)) * 100 + "%";
 }
-function next(){step++;update()}
-function back(){step--;update()}
 
-function copiarPix(){
-  const pix=document.getElementById("pixKey");
+function next() { step++; update(); }
+function back() { step--; update(); }
+
+function copiarPix() {
+  const pix = document.getElementById("pixKey");
   pix.select();
-  pix.setSelectionRange(0,99999);
+  pix.setSelectionRange(0, 99999);
   document.execCommand("copy");
-  document.getElementById("pixMsg").style.display="block";
+  document.getElementById("pixMsg").style.display = "block";
 }
 
-document.getElementById("form").addEventListener("submit",async e=>{
+document.getElementById("form").addEventListener("submit", async e => {
   e.preventDefault();
-  loading.style.display="flex";
-
-  const data=Object.fromEntries(new FormData(e.target));
-  const file=document.getElementById("file").files[0];
-  const reader=new FileReader();
-
-  reader.onload=async()=>{
-    data.comprovanteBase64=reader.result.split(",")[1];
-    data.comprovanteTipo=file.type;
-    data.comprovanteNome=file.name;
-
-    await fetch(SCRIPT_URL,{method:"POST",body:JSON.stringify(data)});
-
-    loading.style.display="none";
-    form.style.display="none";
-    successScreen.style.display="block";
-  };
-  reader.readAsDataURL(file);
+  document.getElementById("loading").style.display = "flex";
+  const data = Object.fromEntries(new FormData(e.target));
+  const file = document.getElementById("file").files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = async () => {
+      data.comprovanteBase64 = reader.result.split(",")[1];
+      data.comprovanteTipo = file.type;
+      data.comprovanteNome = file.name;
+      await fetch(SCRIPT_URL, { method: "POST", body: JSON.stringify(data) });
+      document.getElementById("loading").style.display = "none";
+      document.getElementById("form").style.display = "none";
+      document.getElementById("successScreen").style.display = "block";
+    };
+    reader.readAsDataURL(file);
+  } else {
+    // Caso sem arquivo (mas required deve impedir)
+    await fetch(SCRIPT_URL, { method: "POST", body: JSON.stringify(data) });
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("form").style.display = "none";
+    document.getElementById("successScreen").style.display = "block";
+  }
 });
 </script>
-
 </body>
 </html>
