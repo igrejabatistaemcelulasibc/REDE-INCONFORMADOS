@@ -6,49 +6,39 @@
 <title>Inscrição – Acamp Jovem</title>
 
 <style>
-:root{
-  --primary:#1f7a63;
-  --bg:#f4f6f5;
-}
-
+:root{--primary:#1f7a63}
 *{box-sizing:border-box;font-family:Inter,Arial,sans-serif}
-body{margin:0;background:var(--bg);}
+body{margin:0;background:linear-gradient(120deg,#e9f5f1,#fff);color:#222}
+header{background:#fff;padding:16px 24px;box-shadow:0 4px 20px rgba(0,0,0,.06)}
+main{max-width:900px;margin:40px auto;background:#fff;border-radius:20px;padding:32px;box-shadow:0 30px 60px rgba(0,0,0,.08);position:relative}
 
-main{
-  max-width:900px;
-  margin:40px auto;
-  background:#fff;
-  padding:32px;
-  border-radius:20px;
-}
+.progress{height:6px;background:#eee;border-radius:99px;overflow:hidden;margin-bottom:24px}
+.progress div{height:100%;width:0;background:var(--primary);transition:.3s}
 
-.step{display:none}
-.step.active{display:block}
+.step{position:absolute;inset:0;opacity:0;pointer-events:none;transition:.3s}
+.step.active{position:relative;opacity:1;pointer-events:auto}
 
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-}
-
-@media(max-width:700px){
-  .grid{grid-template-columns:1fr}
-}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}}
 
 input,select,textarea{
   width:100%;
   padding:12px;
   border-radius:10px;
-  border:1px solid #ccc;
+  border:1px solid #ddd;
 }
+textarea{min-height:100px}
 
-textarea{min-height:120px}
-
-.actions{
+.checkbox-group label{
   display:flex;
-  justify-content:space-between;
-  margin-top:30px;
+  align-items:flex-start;
+  gap:10px;
+  line-height:1.4;
+  margin-bottom:12px;
 }
+.checkbox-group input{margin-top:4px}
+
+.actions{display:flex;justify-content:space-between;margin-top:32px}
 
 button{
   background:var(--primary);
@@ -58,7 +48,6 @@ button{
   border-radius:12px;
   cursor:pointer;
 }
-
 button.secondary{background:#ccc;color:#000}
 
 #loading{
@@ -68,30 +57,55 @@ button.secondary{background:#ccc;color:#000}
   display:none;
   align-items:center;
   justify-content:center;
+  z-index:999;
 }
+.spinner{
+  width:40px;height:40px;
+  border:4px solid #ddd;
+  border-top:4px solid var(--primary);
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-.success{text-align:center}
+#successScreen{text-align:center;display:none}
+#successScreen a{
+  display:inline-block;
+  margin-top:20px;
+  background:#25D366;
+  color:#fff;
+  padding:14px 24px;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:600;
+}
 </style>
 </head>
 
 <body>
 
+<header>
+  <h2>Acamp Jovem – Inscrição</h2>
+</header>
+
 <main>
 
-<form id="form">
+<div class="progress"><div id="bar"></div></div>
 
-<!-- STEP 1 -->
+<form id="form" novalidate>
+
+<!-- IDENTIFICAÇÃO -->
 <section class="step active">
 <h2>Identificação</h2>
 <div class="grid">
-<input name="nome" placeholder="Nome completo" required>
-<input type="date" name="nascimento" required>
-<input name="idade" placeholder="Idade" required>
-<input name="sexo" placeholder="Sexo" required>
-<input name="igreja" placeholder="Igreja" required>
-<input name="telefone" placeholder="Telefone" required>
-<input name="cidade" placeholder="Cidade" required>
-<input name="convidado" placeholder="Quem convidou">
+<input name="Nome" placeholder="Nome completo" required>
+<input type="date" name="Nascimento" required>
+<input name="Idade" placeholder="Idade" required>
+<input name="Sexo" placeholder="Sexo" required>
+<input name="Igreja" placeholder="Igreja / Congregação" required>
+<input name="TelefoneParticipante" placeholder="Telefone" required>
+<input name="Cidade" placeholder="Cidade / Bairro" required>
+<input name="ConvidadoPor" placeholder="Quem convidou">
 </div>
 <div class="actions">
 <span></span>
@@ -99,18 +113,18 @@ button.secondary{background:#ccc;color:#000}
 </div>
 </section>
 
-<!-- STEP 2 -->
+<!-- RESPONSÁVEL -->
 <section class="step">
-<h2>Responsável</h2>
+<h2>Responsável Legal</h2>
 <div class="grid">
-<input name="responsavelNome" placeholder="Nome do responsável" required>
-<input name="responsavelParentesco" placeholder="Parentesco" required>
-<input name="responsavelTelefone" placeholder="Telefone" required>
-<input name="responsavelEmergencia" placeholder="Emergência" required>
-<select name="autorizacaoResponsavel" required>
-<option value="">Autoriza?</option>
-<option>Sim</option>
-<option>Não</option>
+<input name="ResponsavelNome" placeholder="Nome do responsável">
+<input name="ResponsavelParentesco" placeholder="Parentesco">
+<input name="ResponsavelTelefone" placeholder="Telefone">
+<input name="ResponsavelEmergencia" placeholder="Telefone emergência">
+<select name="AutorizacaoResponsavel">
+<option value="">Autoriza participação?</option>
+<option value="Sim">Sim</option>
+<option value="Não">Não</option>
 </select>
 </div>
 <div class="actions">
@@ -119,20 +133,18 @@ button.secondary{background:#ccc;color:#000}
 </div>
 </section>
 
-<!-- STEP 3 -->
+<!-- SAÚDE -->
 <section class="step">
 <h2>Saúde</h2>
 <div class="grid">
-<input name="alergia" placeholder="Possui alergia?">
-<input name="alergiaDescricao" placeholder="Qual alergia?">
-<input name="restricao" placeholder="Restrição alimentar?">
-<input name="restricaoDescricao" placeholder="Qual restrição?">
-<input name="medicamento" placeholder="Usa medicamento?">
-<input name="medicamentoDescricao" placeholder="Qual medicamento?">
-<input name="condicao" placeholder="Condição de saúde">
-<input name="reacao" placeholder="Reação em emergência">
-<input name="tipoSanguineo" placeholder="Tipo sanguíneo">
-<input name="planoSaude" placeholder="Plano de saúde">
+<input name="Alergia" placeholder="Possui alergia?">
+<input name="AlergiaDescricao" placeholder="Qual alergia?">
+<input name="RestricaoAlimentar" placeholder="Restrição alimentar?">
+<input name="RestricaoDescricao" placeholder="Qual restrição?">
+<input name="Medicamento" placeholder="Usa medicamento contínuo?">
+<input name="MedicamentoDescricao" placeholder="Qual medicamento?">
+<input name="CondicaoSaude" placeholder="Condição de saúde">
+<input name="TipoSanguineo" placeholder="Tipo sanguíneo">
 </div>
 <div class="actions">
 <button type="button" class="secondary" onclick="back()">Voltar</button>
@@ -140,29 +152,25 @@ button.secondary{background:#ccc;color:#000}
 </div>
 </section>
 
-<!-- STEP 4 -->
+<!-- LOGÍSTICA E AUTORIZAÇÕES -->
 <section class="step">
-<h2>Emergência e Logística</h2>
-<div class="grid">
-<input name="contatoEmergenciaNome" placeholder="Contato emergência">
-<input name="contatoEmergenciaParentesco" placeholder="Parentesco">
-<input name="contatoEmergenciaTelefone" placeholder="Telefone emergência">
-<select name="transporte" required>
-<option value="">Como irá?</option>
-<option>Preciso de carona</option>
-<option>Carro próprio / responsável</option>
-<option>Outro</option>
+<h2>Logística e Autorizações</h2>
+
+<select name="logistica_transporte" required>
+<option value="">Como irá ao local?</option>
+<option value="Preciso de carona">Preciso de carona</option>
+<option value="Carro próprio / responsável">Carro próprio / responsável</option>
+<option value="Outro">Outro</option>
 </select>
-</div>
-
-<br>
-
-<label><input type="checkbox" name="autImagem" value="Sim" required> Autorizo uso de imagem</label><br>
-<label><input type="checkbox" name="autMedica" value="Sim" required> Autorizo atendimento médico</label><br>
-<label><input type="checkbox" name="declaracao" value="Sim" required> Declaro informações verdadeiras</label><br>
-<label><input type="checkbox" name="regras" value="Sim" required> Estou ciente das regras</label>
 
 <br><br>
+
+<div class="checkbox-group">
+<label><input type="checkbox" name="autorizacao_imagem" value="Sim" required> Autorizo uso de imagem</label>
+<label><input type="checkbox" name="autorizacao_medica" value="Sim" required> Autorizo atendimento médico</label>
+<label><input type="checkbox" name="declaracao_verdade" value="Sim" required> Declaro informações verdadeiras</label>
+<label><input type="checkbox" name="ciente_regras" value="Sim" required> Estou ciente das regras</label>
+</div>
 
 <textarea name="observacoes" placeholder="Observações importantes"></textarea>
 
@@ -172,9 +180,31 @@ button.secondary{background:#ccc;color:#000}
 </div>
 </section>
 
-<!-- STEP 5 -->
+<!-- PIX -->
 <section class="step">
-<h2>Comprovante</h2>
+<h2>Pagamento – PIX</h2>
+<p><strong>Valor:</strong> R$ 100,00</p>
+
+<label>Chave PIX</label>
+<input id="pixKey" value="SUA_CHAVE_PIX_AQUI" readonly>
+
+<button type="button" onclick="copiarPix()" style="margin-top:10px">
+📋 Copiar chave PIX
+</button>
+
+<p id="pixMsg" style="display:none;color:green;margin-top:10px">
+Chave PIX copiada com sucesso ✅
+</p>
+
+<div class="actions">
+<button type="button" class="secondary" onclick="back()">Voltar</button>
+<button type="button" onclick="next()">Já paguei</button>
+</div>
+</section>
+
+<!-- COMPROVANTE -->
+<section class="step">
+<h2>Enviar comprovante</h2>
 <input type="file" id="file" required>
 <div class="actions">
 <button type="button" class="secondary" onclick="back()">Voltar</button>
@@ -184,54 +214,59 @@ button.secondary{background:#ccc;color:#000}
 
 </form>
 
-<section class="step success">
-<h2>Inscrição concluída</h2>
-<p>Entre no grupo do WhatsApp:</p>
-<a href="https://chat.whatsapp.com/SEU-LINK-AQUI" target="_blank">
-Entrar no grupo
+<div id="successScreen">
+<h2>Inscrição concluída com sucesso 🎉</h2>
+<p>Entre no grupo oficial do WhatsApp:</p>
+<a href="https://chat.whatsapp.com/FwddVr1MnyZ7LGlCYWPrsL?mode=gi_t" target="_blank">
+Entrar no grupo do WhatsApp
 </a>
-</section>
+</div>
 
 </main>
 
-<div id="loading"><h3>Enviando… aguarde</h3></div>
+<div id="loading"><div class="spinner"></div></div>
 
 <script>
-const SCRIPT_URL = "COLE_AQUI_SUA_URL_DO_APPS_SCRIPT";
+const SCRIPT_URL="https://script.google.com/macros/s/AKfycbyhcUoeIShSmNFv0HNQiNsFwxHTOggHjdZ54Jryv7_RLvwCCj-JB2lNiDocPMa5dzeg/exec";
 
-let step = 0;
-const steps = document.querySelectorAll(".step");
+let step=0;
+const steps=document.querySelectorAll(".step");
+const bar=document.getElementById("bar");
 
 function update(){
   steps.forEach((s,i)=>s.classList.toggle("active",i===step));
+  bar.style.width=(step/(steps.length-1))*100+"%";
 }
-
 function next(){step++;update()}
 function back(){step--;update()}
 
-document.getElementById("form").addEventListener("submit",e=>{
+function copiarPix(){
+  const pix=document.getElementById("pixKey");
+  pix.select();
+  pix.setSelectionRange(0,99999);
+  document.execCommand("copy");
+  document.getElementById("pixMsg").style.display="block";
+}
+
+document.getElementById("form").addEventListener("submit",async e=>{
   e.preventDefault();
-  document.getElementById("loading").style.display="flex";
+  loading.style.display="flex";
 
-  const data = Object.fromEntries(new FormData(e.target));
-  const file = document.getElementById("file").files[0];
+  const data=Object.fromEntries(new FormData(e.target));
+  const file=document.getElementById("file").files[0];
+  const reader=new FileReader();
 
-  const reader = new FileReader();
-  reader.onload = async ()=>{
-    data.comprovanteBase64 = reader.result.split(",")[1];
-    data.comprovanteTipo = file.type;
-    data.comprovanteNome = file.name;
+  reader.onload=async()=>{
+    data.comprovanteBase64=reader.result.split(",")[1];
+    data.comprovanteTipo=file.type;
+    data.comprovanteNome=file.name;
 
-    await fetch(SCRIPT_URL,{
-      method:"POST",
-      body:JSON.stringify(data)
-    });
+    await fetch(SCRIPT_URL,{method:"POST",body:JSON.stringify(data)});
 
-    document.getElementById("loading").style.display="none";
-    step++;
-    update();
+    loading.style.display="none";
+    form.style.display="none";
+    successScreen.style.display="block";
   };
-
   reader.readAsDataURL(file);
 });
 </script>
