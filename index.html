@@ -1,415 +1,343 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acamp Jovem – Inscrição</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@700;800;900&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #39ff14;
-      --bg: #021a30;
-      --bg2: #01101f;
-      --card: rgba(255,255,255,.05);
-      --border: rgba(255,255,255,.12);
-      --text: #ffffff;
-      --muted: #9ca3af;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(180deg, var(--bg), var(--bg2));
-      color: var(--text);
-      min-height: 100vh;
-    }
-    section { padding: 80px 5%; }
-    .form-container {
-      max-width: 900px;
-      margin: auto;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 32px;
-      backdrop-filter: blur(10px);
-    }
-    h3 {
-      font-family: 'Poppins', sans-serif;
-      margin: 0 0 24px;
-      font-size: 1.8rem;
-    }
-    .progress {
-      height: 6px;
-      background: var(--border);
-      border-radius: 99px;
-      margin-bottom: 32px;
-      overflow: hidden;
-    }
-    .progress div {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--primary), #00ff88);
-      transition: width .4s ease;
-    }
-    .step { display: none; }
-    .step.active { display: block; }
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-    @media (max-width: 768px) {
-      .form-grid { grid-template-columns: 1fr; }
-    }
-    label {
-      font-size: .9rem;
-      color: var(--muted);
-      margin-bottom: 6px;
-      display: block;
-    }
-    input, select, textarea {
-      width: 100%;
-      padding: 14px 16px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.06);
-      color: white;
-      font-size: 1rem;
-    }
-    input::placeholder { color: #6b7280; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acamp Jovem – Inscrição</title>
 
-    /* Correção principal: forçar visibilidade nos selects e options */
-    select {
-      color: white !important;
-      background-color: rgba(255,255,255,.06) !important;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@700;800;900&display=swap" rel="stylesheet">
 
-    select option {
-      background-color: #0a2540 !important;     /* fundo escuro nas opções */
-      color: white !important;                  /* texto branco forçado */
-    }
+<style>
+:root{
+  --primary:#39ff14;
+  --bg:#021a30;
+  --bg2:#01101f;
+  --card:rgba(255,255,255,.05);
+  --border:rgba(255,255,255,.12);
+  --text:#fff;
+  --muted:#9ca3af;
+}
 
-    select option:checked,
-    select option:hover,
-    select option:focus {
-      background-color: #1a3a5e !important;     /* destaque ao selecionar/hover */
-      color: white !important;
-    }
+*{box-sizing:border-box;font-family:Inter,Arial,sans-serif}
 
-    textarea { min-height: 110px; resize: vertical; }
+body{
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(180deg,var(--bg),var(--bg2));
+  color:var(--text);
+}
 
-    .actions {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 40px;
-      gap: 16px;
-    }
-    button {
-      background: linear-gradient(135deg, var(--primary), #00ff88);
-      border: none;
-      padding: 14px 32px;
-      border-radius: 50px;
-      font-weight: 700;
-      color: black;
-      font-size: 1.05rem;
-      cursor: pointer;
-      transition: all .2s;
-    }
-    button:hover { transform: translateY(-1px); box-shadow: 0 8px 25px rgba(57,255,20,.4); }
-    button.secondary {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--muted);
-    }
-    button.secondary:hover { background: rgba(255,255,255,.06); }
+section{padding:80px 5%}
 
-    /* Checkbox */
-    .checkbox-group {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin: 24px 0 32px;
-    }
-    .checkbox-group label {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: .98rem;
-      color: white;
-      cursor: pointer;
-      user-select: none;
-    }
-    .checkbox-group input {
-      width: 20px;
-      height: 20px;
-      accent-color: var(--primary);
-      flex-shrink: 0;
-    }
+main{
+  max-width:900px;
+  margin:auto;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:32px;
+  backdrop-filter:blur(10px);
+}
 
-    /* Loading */
-    #loading {
-      position: fixed;
-      inset: 0;
-      background: rgba(2,26,48,.96);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
-    .spinner {
-      width: 56px; height: 56px;
-      border: 5px solid var(--border);
-      border-top: 5px solid var(--primary);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
+h2,h3{
+  font-family:Poppins,sans-serif;
+  margin:0 0 24px;
+}
 
-    #successScreen {
-      display: none;
-      text-align: center;
-      padding: 60px 20px;
-    }
-    #successScreen h2 { margin-bottom: 24px; font-family: Poppins; }
-    #successScreen a {
-      display: inline-block;
-      margin-top: 20px;
-      background: #25D366;
-      color: white;
-      padding: 16px 40px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1.1rem;
-    }
-  </style>
+.progress{
+  height:6px;
+  background:var(--border);
+  border-radius:99px;
+  overflow:hidden;
+  margin-bottom:32px;
+}
+.progress div{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),#00ff88);
+  transition:.4s;
+}
+
+.step{display:none}
+.step.active{display:block}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+@media(max-width:768px){
+  .grid{grid-template-columns:1fr}
+}
+
+label{
+  font-size:.9rem;
+  color:var(--muted);
+  margin-bottom:6px;
+  display:block;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:14px 16px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.06);
+  color:white;
+  font-size:1rem;
+}
+
+textarea{min-height:110px}
+
+select option{
+  background:#0a2540;
+  color:white;
+}
+
+.checkbox-group{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  margin:24px 0;
+}
+.checkbox-group label{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:.95rem;
+  cursor:pointer;
+}
+.checkbox-group input{
+  width:20px;
+  height:20px;
+  accent-color:var(--primary);
+}
+
+.actions{
+  display:flex;
+  justify-content:space-between;
+  margin-top:40px;
+  gap:16px;
+}
+
+button{
+  background:linear-gradient(135deg,var(--primary),#00ff88);
+  border:none;
+  padding:14px 32px;
+  border-radius:50px;
+  font-weight:700;
+  cursor:pointer;
+}
+button.secondary{
+  background:transparent;
+  border:1px solid var(--border);
+  color:var(--muted);
+}
+
+#loading{
+  position:fixed;
+  inset:0;
+  background:rgba(2,26,48,.96);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+.spinner{
+  width:56px;
+  height:56px;
+  border:5px solid var(--border);
+  border-top:5px solid var(--primary);
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+#successScreen{
+  display:none;
+  text-align:center;
+  padding:60px 20px;
+}
+#successScreen a{
+  display:inline-block;
+  margin-top:20px;
+  background:#25D366;
+  color:white;
+  padding:16px 40px;
+  border-radius:50px;
+  text-decoration:none;
+  font-weight:700;
+}
+</style>
 </head>
+
 <body>
 <section>
-  <div class="form-container">
-    <div class="progress"><div id="bar"></div></div>
+<main>
 
-    <form id="form">
-      <!-- IDENTIFICAÇÃO -->
-      <div class="step active">
-        <h3>Identificação</h3>
-        <div class="form-grid">
-          <div><label>Nome completo</label><input name="Nome" required></div>
-          <div><label>Data de nascimento</label><input type="date" name="Nascimento" required></div>
-          <div><label>Idade</label><input name="Idade" required></div>
-          <div><label>Sexo</label><input name="Sexo" required></div>
-          <div><label>Igreja / Congregação</label><input name="Igreja" required></div>
-          <div><label>Telefone</label><input name="Telefone" required></div>
-          <div><label>Cidade / Bairro</label><input name="Cidade" required></div>
-          <div><label>Quem convidou</label><input name="ConvidadoPor"></div>
-        </div>
-        <div class="actions">
-          <span></span>
-          <button type="button" onclick="next()">Continuar</button>
-        </div>
-      </div>
+<div class="progress"><div id="bar"></div></div>
 
-      <!-- RESPONSÁVEL -->
-      <div class="step">
-        <h3>Responsável Legal</h3>
-        <div class="form-grid">
-          <div><label>Nome</label><input name="RespNome"></div>
-          <div><label>Parentesco</label><input name="RespParentesco"></div>
-          <div><label>Telefone</label><input name="RespTelefone"></div>
-          <div><label>Emergência</label><input name="RespEmergencia"></div>
-          <div>
-            <label>Autoriza participação?</label>
-            <select name="RespAutoriza" required>
-              <option value="">Selecione</option>
-              <option value="Sim">Sim</option>
-              <option value="Não">Não</option>
-            </select>
-          </div>
-        </div>
-        <div class="actions">
-          <button type="button" class="secondary" onclick="back()">Voltar</button>
-          <button type="button" onclick="next()">Continuar</button>
-        </div>
-      </div>
+<form id="form" novalidate>
 
-      <!-- SAÚDE -->
-      <div class="step">
-        <h3>Saúde</h3>
-        <div class="form-grid">
-          <div><label>Possui alergia?</label><input name="Alergia"></div>
-          <div><label>Qual alergia?</label><input name="AlergiaDescricao"></div>
-          <div><label>Restrição alimentar?</label><input name="Restricao"></div>
-          <div><label>Qual restrição?</label><input name="RestricaoDescricao"></div>
-          <div><label>Usa medicamento contínuo?</label><input name="Medicamento"></div>
-          <div><label>Qual medicamento?</label><input name="MedicamentoDescricao"></div>
-          <div><label>Condição de saúde</label><input name="CondicaoSaude"></div>
-          <div><label>Tipo sanguíneo</label><input name="TipoSanguineo"></div>
-        </div>
-        <div class="actions">
-          <button type="button" class="secondary" onclick="back()">Voltar</button>
-          <button type="button" onclick="next()">Continuar</button>
-        </div>
-      </div>
+<!-- IDENTIFICAÇÃO -->
+<div class="step active">
+<h3>Inscrição - ACAMP JOVEM IBC</h3>
+<div class="grid">
+<input name="Nome" placeholder="Nome completo" required>
+<input type="date" name="Nascimento" required>
+<input name="Idade" placeholder="Idade" required>
+<input name="Sexo" placeholder="Sexo" required>
+<input name="Igreja" placeholder="Igreja / Congregação" required>
+<input name="TelefoneParticipante" placeholder="Telefone" required>
+<input name="Cidade" placeholder="Cidade / Bairro" required>
+<input name="ConvidadoPor" placeholder="Quem convidou">
+</div>
+<div class="actions">
+<span></span>
+<button type="button" onclick="next()">Continuar</button>
+</div>
+</div>
 
-      <!-- AUTORIZAÇÕES -->
-      <div class="step">
-        <h3>Autorizações</h3>
-        <label>Como irá ao local?</label>
-        <select name="Transporte" required>
-          <option value="">Selecione</option>
-          <option value="Preciso de carona">Preciso de carona</option>
-          <option value="Carro próprio / responsável">Carro próprio / responsável</option>
-        </select>
+<!-- RESPONSÁVEL -->
+<div class="step">
+<h3>Responsável Legal</h3>
+<div class="grid">
+<input name="ResponsavelNome" placeholder="Nome do responsável">
+<input name="ResponsavelParentesco" placeholder="Parentesco">
+<input name="ResponsavelTelefone" placeholder="Telefone">
+<input name="ResponsavelEmergencia" placeholder="Telefone emergência">
+<select name="AutorizacaoResponsavel">
+<option value="">Autoriza participação?</option>
+<option value="Sim">Sim</option>
+<option value="Não">Não</option>
+</select>
+</div>
+<div class="actions">
+<button type="button" class="secondary" onclick="back()">Voltar</button>
+<button type="button" onclick="next()">Continuar</button>
+</div>
+</div>
 
-        <div class="checkbox-group">
-          <label><input type="checkbox" name="UsoImagem" value="Sim" required> Autorizo uso de imagem</label>
-          <label><input type="checkbox" name="AtendimentoMedico" value="Sim" required> Autorizo atendimento médico</label>
-          <label><input type="checkbox" name="Declaracao" value="Sim" required> Declaro que as informações são verdadeiras</label>
-          <label><input type="checkbox" name="CienteRegras" value="Sim" required> Estou ciente das regras do evento</label>
-        </div>
+<!-- SAÚDE -->
+<div class="step">
+<h3>Saúde</h3>
+<div class="grid">
+<input name="Alergia" placeholder="Possui alergia?">
+<input name="AlergiaDescricao" placeholder="Qual alergia?">
+<input name="RestricaoAlimentar" placeholder="Restrição alimentar?">
+<input name="RestricaoDescricao" placeholder="Qual restrição?">
+<input name="Medicamento" placeholder="Usa medicamento contínuo?">
+<input name="MedicamentoDescricao" placeholder="Qual medicamento?">
+<input name="CondicaoSaude" placeholder="Condição de saúde">
+<input name="TipoSanguineo" placeholder="Tipo sanguíneo">
+</div>
+<div class="actions">
+<button type="button" class="secondary" onclick="back()">Voltar</button>
+<button type="button" onclick="next()">Continuar</button>
+</div>
+</div>
 
-        <label>Observações</label>
-        <textarea name="Observacoes" placeholder="Alguma informação adicional importante?"></textarea>
+<!-- AUTORIZAÇÕES -->
+<div class="step">
+<h3>Autorizações</h3>
 
-        <div class="actions">
-          <button type="button" class="secondary" onclick="back()">Voltar</button>
-          <button type="button" onclick="next()">Continuar</button>
-        </div>
-      </div>
+<select name="logistica_transporte" required>
+<option value="">Como irá ao local?</option>
+<option value="Preciso de carona">Preciso de carona</option>
+<option value="Carro próprio / responsável">Carro próprio / responsável</option>
+</select>
 
-      <!-- PIX -->
-      <div class="step">
-        <h3>Pagamento via PIX</h3>
-        <p style="margin:0 0 16px; color:#d1d5db;">Valor: <strong>R$ 100,00</strong></p>
-        <input id="pixKey" value="SUA_CHAVE_PIX_AQUI" readonly style="margin-bottom:16px;">
-        <button type="button" onclick="copiarPix()">Copiar chave PIX</button>
-        <div class="actions">
-          <button type="button" class="secondary" onclick="back()">Voltar</button>
-          <button type="button" onclick="next()">Já realizei o pagamento</button>
-        </div>
-      </div>
+<div class="checkbox-group">
+<label><input type="checkbox" name="autorizacao_imagem" value="Sim" required> Autorizo uso de imagem</label>
+<label><input type="checkbox" name="autorizacao_medica" value="Sim" required> Autorizo atendimento médico</label>
+<label><input type="checkbox" name="declaracao_verdade" value="Sim" required> Declaro informações verdadeiras</label>
+<label><input type="checkbox" name="ciente_regras" value="Sim" required> Estou ciente das regras</label>
+</div>
 
-      <!-- COMPROVANTE -->
-      <div class="step">
-        <h3>Enviar comprovante</h3>
-        <input type="file" id="file" accept="image/*,.pdf" required>
-        <p style="font-size:0.9rem; color:var(--muted); margin-top:8px;">
-          Envie foto do comprovante (PNG, JPG ou PDF)
-        </p>
-        <div class="actions">
-          <button type="button" class="secondary" onclick="back()">Voltar</button>
-          <button type="submit">Finalizar inscrição</button>
-        </div>
-      </div>
-    </form>
+<textarea name="observacoes" placeholder="Observações importantes"></textarea>
 
-    <div id="successScreen">
-      <h2>Inscrição concluída com sucesso! 🎉</h2>
-      <p style="margin:24px 0; color:#d1d5db;">Agora é só entrar no grupo oficial:</p>
-      <a href="https://chat.whatsapp.com/FwddVr1MnyZ7LGlCYWPrsL" target="_blank">
-        Entrar no grupo do WhatsApp
-      </a>
-    </div>
-  </div>
+<div class="actions">
+<button type="button" class="secondary" onclick="back()">Voltar</button>
+<button type="button" onclick="next()">Continuar</button>
+</div>
+</div>
+
+<!-- PIX -->
+<div class="step">
+<h3>Pagamento – PIX</h3>
+<p>Valor: <strong>R$ 50,00</strong></p>
+<input id="pixKey" value="39.952.787/0001=27" readonly>
+<button type="button" onclick="copiarPix()">Copiar chave PIX</button>
+<div class="actions">
+<button type="button" class="secondary" onclick="back()">Voltar</button>
+<button type="button" onclick="next()">Já paguei</button>
+</div>
+</div>
+
+<!-- COMPROVANTE -->
+<div class="step">
+<h3>Enviar comprovante</h3>
+<input type="file" id="file" required>
+<div class="actions">
+<button type="button" class="secondary" onclick="back()">Voltar</button>
+<button type="submit">Finalizar inscrição</button>
+</div>
+</div>
+
+</form>
+
+<div id="successScreen">
+<h2>Inscrição concluída 🎉</h2>
+<a href="https://chat.whatsapp.com/FwddVr1MnyZ7LGlCYWPrsL" target="_blank">
+Entrar no grupo do WhatsApp
+</a>
+</div>
+
+</main>
 </section>
 
 <div id="loading"><div class="spinner"></div></div>
 
 <script>
-  // ↓ Substitua pelo link REAL do seu Google Apps Script
-  const SCRIPT_URL = "https://script.google.com/macros/s/SEU_ID_AQUI/exec";
+const SCRIPT_URL="https://script.google.com/macros/s/AKfycbyhcUoeIShSmNFv0HNQiNsFwxHTOggHjdZ54Jryv7_RLvwCCj-JB2lNiDocPMa5dzeg/exec";
 
-  const form = document.getElementById("form");
-  const loading = document.getElementById("loading");
-  const success = document.getElementById("successScreen");
-  const steps = document.querySelectorAll(".step");
-  const progress = document.getElementById("bar");
-  let currentStep = 0;
+let step=0;
+const steps=document.querySelectorAll(".step");
+const bar=document.getElementById("bar");
 
-  function updateProgress() {
-    steps.forEach((el, i) => el.classList.toggle("active", i === currentStep));
-    const percent = currentStep === 0 ? 0 : (currentStep / (steps.length - 1)) * 100;
-    progress.style.width = percent + "%";
-  }
+function update(){
+  steps.forEach((s,i)=>s.classList.toggle("active",i===step));
+  bar.style.width=(step/(steps.length-1))*100+"%";
+}
+function next(){step++;update()}
+function back(){step--;update()}
 
-  function next() {
-    if (currentStep < steps.length - 1) {
-      currentStep++;
-      updateProgress();
-    }
-  }
+function copiarPix(){
+  navigator.clipboard.writeText(document.getElementById("pixKey").value);
+}
 
-  function back() {
-    if (currentStep > 0) {
-      currentStep--;
-      updateProgress();
-    }
-  }
+document.getElementById("form").addEventListener("submit",async e=>{
+  e.preventDefault();
+  loading.style.display="flex";
 
-  function copiarPix() {
-    const el = document.getElementById("pixKey");
-    navigator.clipboard.writeText(el.value).then(() => {
-      alert("Chave PIX copiada!");
-    }).catch(() => {
-      alert("Não foi possível copiar automaticamente.");
-    });
-  }
+  const data=Object.fromEntries(new FormData(e.target));
+  const file=document.getElementById("file").files[0];
+  const reader=new FileReader();
 
-  form.addEventListener("submit", async e => {
-    e.preventDefault();
-    const file = document.getElementById("file").files[0];
-    if (!file) {
-      alert("Por favor, envie o comprovante de pagamento.");
-      return;
-    }
+  reader.onload=async()=>{
+    data.comprovanteBase64=reader.result.split(",")[1];
+    data.comprovanteTipo=file.type;
+    data.comprovanteNome=file.name;
 
-    loading.style.display = "flex";
+    await fetch(SCRIPT_URL,{method:"POST",body:JSON.stringify(data)});
 
-    const data = {};
-    const formData = new FormData(form);
-    for (const [key, value] of formData.entries()) {
-      if (data[key]) {
-        if (!Array.isArray(data[key])) data[key] = [data[key]];
-        data[key].push(value);
-      } else {
-        data[key] = value;
-      }
-    }
-
-    const reader = new FileReader();
-    reader.onload = async () => {
-      data.comprovanteBase64 = reader.result.split(",")[1];
-      data.comprovanteNome = file.name;
-      data.comprovanteTipo = file.type;
-
-      try {
-        const res = await fetch(SCRIPT_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data)
-        });
-
-        const result = await res.json();
-        loading.style.display = "none";
-
-        if (result.status === "success") {
-          form.style.display = "none";
-          success.style.display = "block";
-        } else {
-          alert("Erro ao enviar:\n" + (result.message || "Tente novamente"));
-        }
-      } catch (err) {
-        loading.style.display = "none";
-        alert("Erro de conexão:\n" + err.message + "\n\nDica: teste fora do CodePen.");
-      }
-    };
-    reader.readAsDataURL(file);
-  });
-
-  updateProgress();
+    loading.style.display="none";
+    form.style.display="none";
+    successScreen.style.display="block";
+  };
+  reader.readAsDataURL(file);
+});
 </script>
+
 </body>
 </html>
