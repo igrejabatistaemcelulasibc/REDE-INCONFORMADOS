@@ -2,1275 +2,1192 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Rede Inconformados - Juventude</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description"
-        content="Rede Inconformados - Juventude, células, cultos e eventos em destaque." />
+  <meta name="description" content="Rede Inconformados - Juventude, células, cultos e eventos em destaque." />
 
   <style>
-    /* ===================== TEMA E RESET ====================== */
+    /* =========================================================
+      MOBILE-FIRST • UI MODERNA • LIMPA • PERFORMANCE OK
+    ========================================================== */
 
-    :root {
-      --color-bg: #050505;
-      --color-bg-alt: #101010;
-      --color-card: rgba(255, 255, 255, 0.03);
-      --color-card-soft: rgba(255, 255, 255, 0.05);
-      --color-text: #ffffff;
-      --color-muted: #b0b0b0;
-      --color-accent: #ffd400;
-      --color-accent-soft: rgba(255, 212, 0, 0.16);
-      --color-border: #262626;
-      --color-error: #ff4b4b;
-      --color-success: #00d27a;
-      --radius-lg: 1.2rem;
-      --radius-pill: 999px;
-      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.85);
-      --font-main: system-ui, -apple-system, BlinkMacSystemFont,
-                   "Segoe UI", "Neue Montreal", sans-serif;
+    :root{
+      --bg: #060607;
+      --bg2: #0b0c0f;
+      --card: rgba(255,255,255,.04);
+      --card2: rgba(255,255,255,.06);
+      --text: #ffffff;
+      --muted: rgba(255,255,255,.68);
+      --muted2: rgba(255,255,255,.5);
+      --border: rgba(255,255,255,.10);
+      --shadow: 0 18px 45px rgba(0,0,0,.55);
+
+      --accent: #ffd400;
+      --accent2: #ff9100;
+      --accentSoft: rgba(255, 212, 0, .14);
+
+      --success: #00d27a;
+      --error: #ff4b4b;
+
+      --r12: 12px;
+      --r16: 16px;
+      --r20: 20px;
+      --pill: 999px;
+
+      --max: 980px;
+
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html, body {
-      scroll-behavior: smooth;
-      min-height: 100%;
-    }
-
-    body {
-      background: radial-gradient(circle at top, #202020 0, #050505 45%, #000 100%);
-      color: var(--color-text);
-      font-family: var(--font-main);
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    html, body{ height:100%; }
+    body{
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(900px 520px at 50% -10%, rgba(255, 212, 0, .16), transparent 60%),
+        radial-gradient(900px 520px at 20% 10%, rgba(255, 145, 0, .10), transparent 60%),
+        linear-gradient(180deg, var(--bg2), var(--bg));
       -webkit-font-smoothing: antialiased;
-      line-height: 1.6;
+      text-rendering: optimizeLegibility;
+      line-height: 1.55;
+      overflow-x:hidden;
     }
 
-    img {
-      display: block;
-      max-width: 100%;
+    a{ color: var(--accent); text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+    img{ display:block; max-width:100%; height:auto; }
+
+    .container{
+      width: min(var(--max), calc(100% - 2rem));
+      margin: 0 auto;
     }
 
-    a {
-      color: var(--color-accent);
-      text-decoration: none;
-    }
+    /* ===================== TOPBAR ====================== */
 
-    a:hover {
-      text-decoration: underline;
-    }
-
-    button {
-      font-family: inherit;
-    }
-
-    /* ===================== LAYOUT GERAL (MOBILE FIRST) ====================== */
-
-    .page-wrapper {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    main {
-      flex: 1 0 auto;
-    }
-
-    header {
+    .topbar{
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 30;
+      background: rgba(6,6,7,.72);
       backdrop-filter: blur(18px);
-      background: rgba(5, 5, 5, 0.9);
-      border-bottom: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--border);
     }
 
-    .nav {
-      max-width: 100%;
-      padding: 0.7rem 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
+    .topbar-inner{
+      padding: .85rem 0;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: .85rem;
     }
 
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: .75rem;
+      min-width: 0;
     }
 
-    .nav-logo-wrapper {
-      width: 36px;
-      height: 36px;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--color-border);
+    .brand-logo{
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      overflow:hidden;
+      border: 1px solid var(--border);
       background: #000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      flex: 0 0 auto;
     }
-
-    .nav-logo {
-      width: 100%;
-      height: 100%;
+    .brand-logo img{
+      width:100%;
+      height:100%;
       object-fit: cover;
     }
 
-    .nav-text {
-      display: flex;
-      flex-direction: column;
-      gap: 0.05rem;
+    .brand-text{
+      display:flex;
+      flex-direction:column;
+      gap: .12rem;
+      min-width: 0;
     }
-
-    .nav-title {
-      font-size: 0.72rem;
+    .brand-title{
+      font-size: .75rem;
+      letter-spacing: .18em;
       text-transform: uppercase;
-      letter-spacing: 0.18em;
-    }
-
-    .nav-subtitle {
-      font-size: 0.7rem;
-      color: var(--color-muted);
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-
-    .nav-tag {
-      font-size: 0.62rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      padding: 0.25rem 0.6rem;
-      border-radius: var(--radius-pill);
-      border: 1px solid var(--color-border);
-      color: var(--color-accent);
-      background: rgba(0, 0, 0, 0.7);
-    }
-
-    .nav-cta {
-      border-radius: var(--radius-pill);
-      border: 1px solid var(--color-accent);
-      padding: 0.35rem 0.8rem;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      cursor: pointer;
-      background: var(--color-accent-soft);
-      color: var(--color-accent);
-      transition: background 0.2s, color 0.2s, transform 0.1s;
       white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+    .brand-subtitle{
+      font-size: .78rem;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
     }
 
-    .nav-cta:hover {
-      background: var(--color-accent);
-      color: #000;
-      transform: translateY(-1px);
+    .topbar-actions{
+      display:flex;
+      align-items:center;
+      gap: .5rem;
+      flex: 0 0 auto;
     }
 
-    /* ===================== HERO (MOBILE) ====================== */
-
-    .hero {
-      padding: 1.5rem 1rem 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
+    .chip{
+      font-size: .62rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      padding: .35rem .65rem;
+      border-radius: var(--pill);
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,.35);
+      color: rgba(255,255,255,.85);
+      white-space: nowrap;
+      display:none; /* some no mobile pequeno */
     }
 
-    .hero-media {
+    .btn{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      border-radius: var(--pill);
+      padding: .78rem 1.05rem;
+      font-size: .74rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      cursor:pointer;
+      transition: transform .12s ease, background .2s ease, border-color .2s ease;
+      min-height: 44px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: .5rem;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn:hover{ transform: translateY(-1px); }
+    .btn:disabled{ opacity:.65; cursor:not-allowed; transform:none; }
+
+    .btn-primary{
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-color: rgba(255, 212, 0, .45);
+      color:#0b0b0c;
+      font-weight: 700;
+    }
+    .btn-primary:hover{ background: linear-gradient(90deg, #ffe04f, #ffab3d); }
+
+    .btn-ghost{
+      background: transparent;
+      border-color: var(--border);
+    }
+
+    .btn-small{
+      padding: .62rem .95rem;
+      font-size: .68rem;
+    }
+
+    /* ===================== HERO ====================== */
+
+    .hero{
+      padding: 1.2rem 0 1.4rem;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .hero-media{
       position: relative;
-      border-radius: 1.6rem;
-      overflow: hidden;
-      border: 1px solid var(--color-border);
+      border-radius: 22px;
+      overflow:hidden;
+      border: 1px solid var(--border);
       background: #000;
-      box-shadow: var(--shadow-soft);
+      box-shadow: var(--shadow);
+      min-height: 220px;
     }
-
-    .hero-media-img {
-      width: 100%;
-      height: 220px;
+    .hero-media img{
+      width:100%;
+      height: 260px;
       object-fit: cover;
       filter: saturate(1.1) contrast(1.05);
+      transform: scale(1.02);
     }
-
-    .hero-media-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.7) 0,
-        rgba(0, 0, 0, 0.1) 40%,
-        transparent 100%
-      );
+    .hero-media::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(to top, rgba(0,0,0,.78), rgba(0,0,0,.12) 55%, transparent);
+      pointer-events:none;
     }
-
-    .hero-media-badge {
-      position: absolute;
-      left: 1rem;
-      bottom: 1rem;
-      background: rgba(0, 0, 0, 0.8);
-      border-radius: 1rem;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      padding: 0.4rem 0.75rem;
-      font-size: 0.72rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.15rem;
+    .hero-badge{
+      position:absolute;
+      left: 14px;
+      bottom: 14px;
+      right: 14px;
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(0,0,0,.58);
+      border-radius: 16px;
+      padding: .7rem .85rem;
+      display:flex;
+      flex-direction:column;
+      gap: .22rem;
+      backdrop-filter: blur(10px);
     }
-
-    .hero-media-badge-top {
-      font-size: 0.58rem;
+    .hero-badge-top{
+      font-size: .62rem;
+      letter-spacing: .20em;
       text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: var(--color-muted);
+      color: var(--muted);
+    }
+    .hero-badge-main{
+      font-size: .95rem;
+      font-weight: 750;
+      line-height: 1.2;
     }
 
-    .hero-media-badge-main {
-      font-size: 0.86rem;
-      font-weight: 600;
+    .hero-card{
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      padding: 1rem 1rem 1.05rem;
     }
 
-    .hero-content {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-    }
-
-    .hero-tagline {
-      font-size: 0.7rem;
+    .tagline{
+      font-size: .66rem;
+      letter-spacing: .22em;
       text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: var(--color-accent);
+      color: rgba(255, 212, 0, .95);
+      margin-bottom: .55rem;
     }
 
-    .hero-title {
-      font-size: 1.7rem;
-      font-weight: 800;
+    h1{
+      font-size: clamp(1.35rem, 4.4vw, 2.05rem);
+      line-height: 1.08;
+      letter-spacing: .02em;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
-      line-height: 1.1;
+      margin-bottom: .55rem;
     }
-
-    .hero-title span {
-      background: linear-gradient(90deg, #ffd400, #ff9100);
+    h1 .grad{
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
       -webkit-background-clip: text;
-      background-clip: text;
+      background-clip:text;
       color: transparent;
     }
 
-    .hero-subtitle {
-      font-size: 0.9rem;
-      color: var(--color-muted);
+    .subtitle{
+      color: var(--muted);
+      font-size: .95rem;
+      margin-bottom: .9rem;
     }
 
-    .hero-buttons {
-      display: flex;
+    .hero-actions{
+      display:flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 0.4rem;
+      gap: .55rem;
+      margin-bottom: .8rem;
     }
 
-    .btn {
-      border-radius: var(--radius-pill);
-      border: 1px solid var(--color-border);
-      padding: 0.7rem 1.1rem;
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      cursor: pointer;
-      background: transparent;
-      color: var(--color-text);
-      transition: background 0.2s, color 0.2s, transform 0.1s, border-color 0.2s;
-    }
-
-    .btn-primary {
-      border-color: var(--color-accent);
-      background: var(--color-accent);
-      color: #000;
-      font-weight: 600;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-soft);
-    }
-
-    .btn-outline {
-      background: rgba(255, 255, 255, 0.04);
-    }
-
-    .btn-outline:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: var(--color-accent);
-    }
-
-    .btn-sm {
-      padding: 0.55rem 1rem;
-      font-size: 0.7rem;
-    }
-
-    .hero-meta {
-      display: flex;
+    .meta-row{
+      display:flex;
       flex-wrap: wrap;
-      gap: 0.35rem;
-      margin-top: 0.4rem;
+      gap: .45rem;
     }
-
-    .hero-meta-pill {
-      font-size: 0.64rem;
+    .meta-pill{
+      font-size: .62rem;
+      letter-spacing: .18em;
       text-transform: uppercase;
-      letter-spacing: 0.18em;
-      border-radius: var(--radius-pill);
-      border: 1px solid var(--color-border);
-      padding: 0.2rem 0.7rem;
-      color: var(--color-muted);
+      padding: .35rem .7rem;
+      border: 1px solid var(--border);
+      border-radius: var(--pill);
+      color: rgba(255,255,255,.72);
+      background: rgba(255,255,255,.03);
     }
 
-    /* ===================== SEÇÕES GERAIS ====================== */
+    /* ===================== SECTIONS ====================== */
 
-    section {
-      padding: 0 1rem 2rem;
+    section{
+      padding: .6rem 0 1.2rem;
     }
 
-    .section-header {
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-      margin-bottom: 1.1rem;
+    .section-head{
+      display:flex;
+      flex-direction:column;
+      gap: .25rem;
+      margin: .4rem 0 .85rem;
     }
-
-    .section-tag {
-      font-size: 0.64rem;
+    .section-kicker{
+      font-size: .64rem;
+      letter-spacing: .22em;
       text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: var(--color-accent);
+      color: rgba(255, 212, 0, .95);
     }
-
-    .section-title {
-      font-size: 1rem;
+    .section-title{
+      font-size: .98rem;
+      letter-spacing: .22em;
       text-transform: uppercase;
-      letter-spacing: 0.22em;
-      font-weight: 700;
+      color: rgba(255,255,255,.92);
+    }
+    .section-desc{
+      font-size: .95rem;
+      color: var(--muted);
     }
 
-    .section-subtitle {
-      font-size: 0.86rem;
-      color: var(--color-muted);
+    /* ===================== INFO CARDS ====================== */
+
+    .stack{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: .85rem;
     }
 
-    /* ===================== CONHEÇA A JUVENTUDE ====================== */
-
-    .card {
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--color-border);
-      background: var(--color-card);
+    .card{
+      border-radius: var(--r20);
+      border: 1px solid var(--border);
+      background: var(--card);
       padding: 1rem;
-      margin-bottom: 0.9rem;
     }
 
-    .card-highlight {
-      background: radial-gradient(circle at top, #ffd40022 0, #050505 55%);
+    .card.highlight{
+      background:
+        radial-gradient(700px 220px at 20% 0%, rgba(255, 212, 0, .12), transparent 55%),
+        var(--card);
     }
 
-    .card-header {
-      display: flex;
-      align-items: center;
+    .card-top{
+      display:flex;
+      align-items:flex-start;
       justify-content: space-between;
-      gap: 0.5rem;
-      margin-bottom: 0.4rem;
+      gap: .75rem;
+      margin-bottom: .35rem;
     }
-
-    .card-title {
-      font-size: 0.92rem;
-      font-weight: 600;
-      letter-spacing: 0.16em;
+    .card h3{
+      font-size: .95rem;
+      letter-spacing: .14em;
       text-transform: uppercase;
+      font-weight: 760;
     }
-
-    .card-label {
-      font-size: 0.7rem;
+    .card .label{
+      font-size: .7rem;
+      letter-spacing: .16em;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--color-muted);
+      color: var(--muted2);
+      white-space: nowrap;
+    }
+    .card p{
+      color: rgba(255,255,255,.86);
+      font-size: .95rem;
+      margin-top: .2rem;
+    }
+    .bullets{
+      margin-top: .6rem;
+      padding-left: 1.1rem;
+      color: var(--muted);
+      font-size: .92rem;
+      display:grid;
+      gap: .35rem;
     }
 
-    .card-body {
-      font-size: 0.86rem;
-      color: #e2e2e2;
+    .mini-grid{
+      margin-top: .85rem;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: .55rem;
     }
-
-    .card-list {
-      margin-top: 0.3rem;
-      padding-left: 1rem;
-      font-size: 0.84rem;
-      color: var(--color-muted);
-    }
-
-    .card-list li {
-      margin-bottom: 0.2rem;
-    }
-
-    .youth-photos-grid {
-      display: grid;
-      grid-template-columns: 1.3fr 1fr;
-      gap: 0.4rem;
-      margin-top: 0.5rem;
-    }
-
-    .youth-photo {
-      position: relative;
-      border-radius: 1rem;
-      overflow: hidden;
-      border: 1px solid var(--color-border);
-      height: 110px;
-      background-size: cover;
-      background-position: center;
-    }
-
-    .youth-photo::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.6) 0,
-        transparent 65%
-      );
-    }
-
-    .youth-photo-label {
-      position: absolute;
-      left: 0.7rem;
-      bottom: 0.5rem;
-      z-index: 1;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-    }
-
-    .btn-whats-wrapper {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 0.6rem;
-    }
-
-    .btn-whats {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      font-size: 0.76rem;
-      border-radius: var(--radius-pill);
-      border: 1px solid #25d366;
-      padding: 0.55rem 0.9rem;
-      cursor: pointer;
-      background: rgba(37, 211, 102, 0.08);
-      color: #25d366;
-    }
-
-    .btn-whats:hover {
-      background: rgba(37, 211, 102, 0.16);
-    }
-
-    .btn-whats-icon {
-      font-size: 1rem;
-    }
-
-    /* ===================== EVENTOS ====================== */
-
-    .events-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
-    }
-
-    .event-card {
-      border-radius: var(--radius-lg);
-      background: var(--color-card);
-      border: 1px solid var(--color-border);
-      overflow: hidden;
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.5);
-    }
-
-    .event-media {
-      position: relative;
-      height: 150px;
-      background-size: cover;
-      background-position: center;
-    }
-
-    .event-media-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.8) 0,
-        rgba(0, 0, 0, 0.3) 55%,
-        transparent 100%
-      );
-    }
-
-    .event-media-inner {
-      position: absolute;
-      left: 0.8rem;
-      right: 0.8rem;
-      bottom: 0.8rem;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 0.6rem;
-      z-index: 1;
-    }
-
-    .event-chip {
-      font-size: 0.64rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      padding: 0.22rem 0.7rem;
-      background: rgba(0, 0, 0, 0.7);
-    }
-
-    .event-date {
-      font-size: 0.8rem;
-      font-weight: 500;
-    }
-
-    .event-body {
-      padding: 0.8rem 0.9rem 0.6rem;
-    }
-
-    .event-title {
-      font-size: 0.94rem;
-      font-weight: 600;
-      margin-bottom: 0.3rem;
-    }
-
-    .event-desc {
-      font-size: 0.82rem;
-      color: var(--color-muted);
-      margin-bottom: 0.35rem;
-    }
-
-    .event-location {
-      font-size: 0.8rem;
-      color: #e2e2e2;
-    }
-
-    .event-footer {
-      padding: 0.6rem 0.9rem 0.8rem;
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-
-    /* ===================== MODAIS ====================== */
-
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 50;
-    }
-
-    .modal-backdrop.is-visible {
-      display: flex;
-    }
-
-    .modal {
-      width: 100%;
-      max-width: 420px;
-      margin: 0 1rem;
-      border-radius: 1.2rem;
-      border: 1px solid var(--color-border);
-      background: #050505;
-      box-shadow: var(--shadow-soft);
-      display: flex;
-      flex-direction: column;
-      max-height: 90vh;
-      overflow: hidden;
-    }
-
-    .modal-header {
-      padding: 0.85rem 1rem;
-      border-bottom: 1px solid var(--color-border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.8rem;
-    }
-
-    .modal-title {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-    }
-
-    .modal-close {
-      border: none;
-      background: transparent;
-      color: var(--color-muted);
-      font-size: 1.1rem;
-      cursor: pointer;
-    }
-
-    .modal-body {
-      padding: 0.8rem 1rem;
-      overflow-y: auto;
-    }
-
-    .modal-footer {
-      padding: 0.7rem 1rem 0.85rem;
-      border-top: 1px solid var(--color-border);
-      display: flex;
-      justify-content: flex-end;
-      gap: 0.5rem;
-    }
-
-    /* Modal de mapa */
-
-    .map-frame-wrapper {
-      border-radius: 0.9rem;
-      overflow: hidden;
-      border: 1px solid var(--color-border);
+    .mini-photo{
+      border-radius: 16px;
+      overflow:hidden;
+      border: 1px solid var(--border);
+      height: 120px;
       background: #000;
-      margin-top: 0.5rem;
+      position: relative;
+    }
+    .mini-photo img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      filter: saturate(1.05) contrast(1.02);
+      transform: scale(1.02);
+    }
+    .mini-photo::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(to top, rgba(0,0,0,.60), transparent 62%);
+    }
+    .mini-caption{
+      position:absolute;
+      left: 12px;
+      bottom: 10px;
+      font-size: .68rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.92);
+      z-index: 1;
     }
 
-    .map-frame {
-      width: 100%;
-      height: 280px;
-      border: 0;
+    .whats-row{
+      margin-top: .8rem;
+      display:flex;
+      flex-wrap: wrap;
+      gap: .55rem;
+    }
+    .btn-whats{
+      border: 1px solid rgba(37, 211, 102, .55);
+      background: rgba(37, 211, 102, .10);
+      color: #45f08d;
+    }
+    .btn-whats:hover{
+      border-color: rgba(37, 211, 102, .85);
+      background: rgba(37, 211, 102, .16);
     }
 
-    /* Formulário (modal presença) */
+    /* ===================== EVENTS ====================== */
 
-    .form-field {
-      margin-bottom: 0.7rem;
+    .events{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: .9rem;
     }
 
-    .form-label {
-      display: block;
-      font-size: 0.8rem;
-      margin-bottom: 0.15rem;
+    .event{
+      border-radius: var(--r20);
+      border: 1px solid var(--border);
+      background: var(--card);
+      overflow:hidden;
+      box-shadow: 0 10px 28px rgba(0,0,0,.45);
     }
 
-    .form-input,
-    .form-select,
-    .form-textarea {
-      width: 100%;
-      border-radius: 0.8rem;
-      border: 1px solid var(--color-border);
-      padding: 0.55rem 0.7rem;
-      background: rgba(255, 255, 255, 0.03);
-      color: var(--color-text);
-      font-size: 0.8rem;
-      outline: none;
-      transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;
+    .event-media{
+      position: relative;
+      height: 160px;
+      background: #000;
+    }
+    .event-media img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      filter: saturate(1.06) contrast(1.03);
+      transform: scale(1.02);
+    }
+    .event-media::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(to top, rgba(0,0,0,.86), rgba(0,0,0,.22) 55%, transparent);
     }
 
-    .form-input:focus,
-    .form-select:focus,
-    .form-textarea:focus {
-      border-color: var(--color-accent);
-      box-shadow: 0 0 0 1px rgba(255, 212, 0, 0.4);
-      background: rgba(255, 255, 255, 0.05);
+    .event-overlay{
+      position:absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      display:flex;
+      align-items:flex-end;
+      justify-content: space-between;
+      gap: .8rem;
+      z-index: 1;
     }
 
-    .form-textarea {
-      min-height: 80px;
-      resize: vertical;
+    .event-chip{
+      font-size: .62rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      padding: .35rem .65rem;
+      border-radius: var(--pill);
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(10px);
     }
 
-    .form-check {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.78rem;
-      color: var(--color-muted);
+    .event-date{
+      font-size: .85rem;
+      font-weight: 700;
+      color: rgba(255,255,255,.92);
+      text-align:right;
+      line-height: 1.15;
     }
 
-    .form-check input {
-      width: 14px;
-      height: 14px;
+    .event-body{
+      padding: .9rem .95rem .8rem;
+    }
+    .event-title{
+      font-size: 1.02rem;
+      font-weight: 780;
+      margin-bottom: .35rem;
+      letter-spacing: .01em;
+    }
+    .event-desc{
+      color: var(--muted);
+      font-size: .92rem;
+      margin-bottom: .4rem;
+    }
+    .event-loc{
+      color: rgba(255,255,255,.86);
+      font-size: .9rem;
     }
 
-    .form-help {
-      font-size: 0.72rem;
-      color: var(--color-muted);
-      margin-top: 0.2rem;
-    }
-
-    .form-error {
-      font-size: 0.76rem;
-      color: var(--color-error);
-      margin-top: 0.25rem;
-    }
-
-    .form-success {
-      font-size: 0.76rem;
-      color: var(--color-success);
-      margin-top: 0.25rem;
-    }
-
-    .badge-event-info {
-      font-size: 0.74rem;
-      color: var(--color-muted);
-      margin-bottom: 0.3rem;
+    .event-actions{
+      padding: .8rem .95rem 1rem;
+      display:flex;
+      flex-wrap: wrap;
+      gap: .55rem;
     }
 
     /* ===================== FOOTER ====================== */
 
-    footer {
-      border-top: 1px solid var(--color-border);
-      padding: 0.8rem 1rem 1rem;
-      font-size: 0.72rem;
-      color: var(--color-muted);
+    footer{
+      border-top: 1px solid var(--border);
+      padding: 1rem 0 calc(1.1rem + env(safe-area-inset-bottom));
+      color: var(--muted);
+      font-size: .8rem;
     }
-
-    .footer-inner {
-      display: flex;
+    .footer-row{
+      display:flex;
       justify-content: space-between;
-      gap: 0.7rem;
+      align-items:center;
+      gap: .85rem;
       flex-wrap: wrap;
     }
 
-    /* ===================== DESKTOP AJUSTES ====================== */
+    /* ===================== MODALS ====================== */
 
-    @media (min-width: 768px) {
-      .nav {
-        max-width: 900px;
-        margin: 0 auto;
-      }
+    .backdrop{
+      position: fixed;
+      inset: 0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background: rgba(0,0,0,.72);
+      z-index: 70;
+      padding: 1rem;
+    }
+    .backdrop.show{ display:flex; }
 
-      .hero {
-        max-width: 900px;
-        margin: 0 auto;
-        flex-direction: row;
-      }
-
-      .hero-media {
-        flex: 1.1;
-      }
-
-      .hero-media-img {
-        height: 260px;
-      }
-
-      .hero-content {
-        flex: 1;
-      }
-
-      section {
-        max-width: 900px;
-        margin: 0 auto 2rem;
-      }
+    .modal{
+      width: 100%;
+      max-width: 520px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: rgba(10,10,12,.96);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      max-height: 88vh;
+      display:flex;
+      flex-direction:column;
     }
 
-    @media (min-width: 1024px) {
-      .nav {
-        max-width: 1050px;
-      }
+    .modal-head{
+      padding: .9rem 1rem;
+      border-bottom: 1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: .8rem;
+    }
+    .modal-title{
+      font-size: .88rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.92);
+    }
+    .icon-btn{
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      color: rgba(255,255,255,.78);
+      font-size: 1.2rem;
+      line-height: 1;
+      cursor:pointer;
+    }
+    .icon-btn:hover{ background: rgba(255,255,255,.06); }
 
-      .hero {
-        max-width: 1050px;
-      }
+    .modal-body{
+      padding: .95rem 1rem;
+      overflow:auto;
+    }
 
-      section {
-        max-width: 1050px;
-      }
+    .modal-foot{
+      padding: .9rem 1rem;
+      border-top: 1px solid var(--border);
+      display:flex;
+      justify-content:flex-end;
+      gap: .55rem;
+      flex-wrap: wrap;
+    }
 
-      .events-grid {
-        flex-direction: row;
-        flex-wrap: wrap;
-      }
+    /* map */
+    .map-frame{
+      width: 100%;
+      height: 290px;
+      border: 0;
+      border-radius: 16px;
+      overflow:hidden;
+      background:#000;
+      border: 1px solid var(--border);
+    }
 
-      .event-card {
-        width: calc(50% - 0.5rem);
-      }
+    /* form */
+    .hint{
+      font-size: .82rem;
+      color: var(--muted);
+      margin-top: .25rem;
+    }
+    .event-info{
+      font-size: .85rem;
+      color: var(--muted);
+      margin-bottom: .7rem;
+    }
+
+    .field{ margin-bottom: .75rem; }
+    .label{
+      display:block;
+      font-size: .85rem;
+      color: rgba(255,255,255,.88);
+      margin-bottom: .25rem;
+    }
+    input, select, textarea{
+      width:100%;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      padding: .72rem .85rem;
+      font-size: .95rem;
+      outline: none;
+      transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    input:focus, select:focus, textarea:focus{
+      border-color: rgba(255,212,0,.65);
+      box-shadow: 0 0 0 3px rgba(255, 212, 0, .12);
+      background: rgba(255,255,255,.05);
+    }
+    .check{
+      display:flex;
+      align-items:center;
+      gap: .55rem;
+      color: var(--muted);
+      font-size: .88rem;
+    }
+    .check input{
+      width: 18px;
+      height: 18px;
+      border-radius: 6px;
+    }
+
+    .msg{
+      margin-top: .6rem;
+      font-size: .9rem;
+      padding: .65rem .8rem;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.03);
+    }
+    .msg.error{
+      border-color: rgba(255,75,75,.45);
+      background: rgba(255,75,75,.10);
+      color: #ffd2d2;
+    }
+    .msg.success{
+      border-color: rgba(0,210,122,.45);
+      background: rgba(0,210,122,.10);
+      color: #caffea;
+    }
+
+    /* ===================== RESPONSIVE ====================== */
+    @media (min-width: 420px){
+      .chip{ display:inline-flex; }
+    }
+    @media (min-width: 860px){
+      .hero-grid{ grid-template-columns: 1.15fr .85fr; }
+      .hero-media img{ height: 330px; }
+      .stack{ grid-template-columns: 1fr 1fr; }
+      .events{ grid-template-columns: 1fr 1fr; }
+    }
+
+    /* reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{ scroll-behavior:auto !important; transition:none !important; }
+      .btn:hover{ transform:none; }
     }
   </style>
 </head>
+
 <body>
-  <div class="page-wrapper">
-    <!-- ===================== HEADER ====================== -->
-    <header>
-      <nav class="nav">
-        <div class="nav-left">
-          <div class="nav-logo-wrapper">
-            <!-- Logo da Rede (URL que você forneceu) -->
+  <!-- ===================== TOPBAR ====================== -->
+  <header class="topbar">
+    <div class="container">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-logo" aria-hidden="true">
             <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwmUCNSLdhk4u-1M_DCfFAJrOjs7mCFKe0Gw&s"
               alt="Logo Rede Inconformados"
-              class="nav-logo"
+              loading="lazy"
             />
           </div>
-          <div class="nav-text">
-            <div class="nav-title">Rede Inconformados</div>
-            <div class="nav-subtitle">Juventude • Células • Eventos</div>
+          <div class="brand-text">
+            <div class="brand-title">Rede Inconformados</div>
+            <div class="brand-subtitle">Juventude • Células • Eventos</div>
           </div>
         </div>
-        <div class="nav-right">
-          <div class="nav-tag">Ao vivo com a juventude</div>
-          <button class="nav-cta" data-scroll="#section-events">
+
+        <div class="topbar-actions">
+          <span class="chip">Ao vivo com a juventude</span>
+          <button class="btn btn-primary btn-small" data-scroll="#section-events">
             Próximos eventos
           </button>
         </div>
-      </nav>
-    </header>
+      </div>
+    </div>
+  </header>
 
-    <!-- ===================== HERO ====================== -->
-    <main>
-      <section class="hero" id="top">
-        <div class="hero-media">
-          <!-- Você pode trocar a imagem por uma foto real da juventude -->
-          <img
-            src="https://images.pexels.com/photos/164745/pexels-photo-164745.jpeg?auto=compress&cs=tinysrgb&w=800"
-            alt="Juventude adorando"
-            class="hero-media-img"
-          />
-          <div class="hero-media-overlay"></div>
-          <div class="hero-media-badge">
-            <span class="hero-media-badge-top">Juventude em movimento</span>
-            <span class="hero-media-badge-main">Adoração, Palavra e conexão</span>
-          </div>
-        </div>
-
-        <div class="hero-content">
-          <div class="hero-tagline">Juventude • Rede Inconformados</div>
-          <h1 class="hero-title">
-            Uma geração <span>inconformada</span> com o comum.
-          </h1>
-          <p class="hero-subtitle">
-            Células, cultos e conferências para adolescentes e jovens que desejam viver
-            algo autêntico com Deus, em comunidade.
-          </p>
-
-          <div class="hero-buttons">
-            <button class="btn btn-primary" data-scroll="#section-events">
-              Ver eventos
-            </button>
-            <button class="btn btn-outline" data-scroll="#section-youth">
-              Conhecer a juventude
-            </button>
-          </div>
-
-          <div class="hero-meta">
-            <span class="hero-meta-pill">Células semanais</span>
-            <span class="hero-meta-pill">Cultos da Juventude</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- ===================== CONHEÇA A JUVENTUDE ====================== -->
-      <section id="section-youth">
-        <div class="section-header">
-          <div class="section-tag">Conheça a juventude</div>
-          <div>
-            <h2 class="section-title">Rede Inconformados</h2>
-            <p class="section-subtitle">
-              Um espaço seguro, leve e profundo para adolescentes e jovens crescerem em fé,
-              amizade e propósito.
-            </p>
-          </div>
-        </div>
-
-        <article class="card card-highlight">
-          <div class="card-header">
-            <h3 class="card-title">Quem somos</h3>
-            <span class="card-label">Visão & essência</span>
-          </div>
-          <div class="card-body">
-            A Rede Inconformados é a expressão da juventude da nossa igreja: um movimento
-            de adolescentes e jovens que decidiram não se conformar com uma vida superficial,
-            mas buscar Jesus em cada área da vida.
-          </div>
-
-          <ul class="card-list">
-            <li>Ambiente acolhedor e intencional para novas conexões.</li>
-            <li>Palavra bíblica relevante para a realidade da juventude.</li>
-            <li>Espaço para arte, criatividade e serviço.</li>
-          </ul>
-
-          <div class="youth-photos-grid">
-            <div
-              class="youth-photo"
-              style="background-image:url('https://images.pexels.com/photos/976866/pexels-photo-976866.jpeg?auto=compress&cs=tinysrgb&w=800');"
-            >
-              <div class="youth-photo-label">Cultos</div>
-            </div>
-            <div
-              class="youth-photo"
-              style="background-image:url('https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg?auto=compress&cs=tinysrgb&w=800');"
-            >
-              <div class="youth-photo-label">Células</div>
+  <!-- ===================== HERO ====================== -->
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-media">
+            <img
+              src="https://images.pexels.com/photos/164745/pexels-photo-164745.jpeg?auto=compress&cs=tinysrgb&w=1400"
+              alt="Juventude adorando"
+              loading="lazy"
+            />
+            <div class="hero-badge">
+              <div class="hero-badge-top">Juventude em movimento</div>
+              <div class="hero-badge-main">Adoração, Palavra e conexão</div>
             </div>
           </div>
-        </article>
 
-        <article class="card">
-          <div class="card-header">
-            <h3 class="card-title">Células de adolescentes</h3>
-            <span class="card-label">12–17 anos</span>
-          </div>
-          <div class="card-body">
-            Reuniões semanais em casas, com conversa, Palavra, dinâmicas e oração,
-            pensadas para quem está no ensino fundamental e médio.
-          </div>
-          <ul class="card-list">
-            <li>Ambiente leve para novos amigos.</li>
-            <li>Temas que fazem sentido para o dia a dia da escola e da família.</li>
-          </ul>
-          <div class="btn-whats-wrapper">
-            <button class="btn-whats" data-whats="ado">
-              <span class="btn-whats-icon">📲</span>
-              <span>Falar com a liderança de adolescentes</span>
-            </button>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-header">
-            <h3 class="card-title">Células de jovens</h3>
-            <span class="card-label">18+ anos</span>
-          </div>
-          <div class="card-body">
-            Espaço para universitários, jovens profissionais e jovens casais,
-            com conversas profundas, discipulado e comunhão.
-          </div>
-          <ul class="card-list">
-            <li>Discussões sobre propósito, carreira, afetividade e vocação.</li>
-            <li>Ambiente seguro para perguntas e vulnerabilidade.</li>
-          </ul>
-          <div class="btn-whats-wrapper">
-            <button class="btn-whats" data-whats="jovens">
-              <span class="btn-whats-icon">📲</span>
-              <span>Falar com a liderança de jovens</span>
-            </button>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="card-header">
-            <h3 class="card-title">Cultos da juventude</h3>
-            <span class="card-label">Mensais</span>
-          </div>
-          <div class="card-body">
-            Encontros presenciais com música, Palavra, arte e muito espaço para o Espírito
-            Santo agir, reunindo todas as células e amigos convidados.
-          </div>
-        </article>
-      </section>
-
-      <!-- ===================== EVENTOS EM DESTAQUE ====================== -->
-      <section id="section-events">
-        <div class="section-header">
-          <div class="section-tag">Próximos encontros</div>
-          <div>
-            <h2 class="section-title">Eventos em destaque</h2>
-            <p class="section-subtitle">
-              Fique por dentro do que está acontecendo na Rede Inconformados. Escolha um evento
-              e confirme sua presença.
+          <div class="hero-card">
+            <div class="tagline">Juventude • Rede Inconformados</div>
+            <h1>Uma geração <span class="grad">inconformada</span> com o comum.</h1>
+            <p class="subtitle">
+              Células, cultos e conferências para adolescentes e jovens que desejam viver
+              algo autêntico com Deus, em comunidade.
             </p>
+
+            <div class="hero-actions">
+              <button class="btn btn-primary" data-scroll="#section-events">Ver eventos</button>
+              <button class="btn btn-ghost" data-scroll="#section-youth">Conhecer a juventude</button>
+            </div>
+
+            <div class="meta-row">
+              <span class="meta-pill">Células semanais</span>
+              <span class="meta-pill">Cultos da Juventude</span>
+              <span class="meta-pill">Eventos especiais</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SECTION: YOUTH ====================== -->
+    <section id="section-youth">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Conheça a juventude</div>
+          <div class="section-title">Rede Inconformados</div>
+          <div class="section-desc">
+            Um espaço seguro, leve e profundo para adolescentes e jovens crescerem em fé,
+            amizade e propósito.
           </div>
         </div>
 
-        <div id="events-container" class="events-grid"></div>
-      </section>
-    </main>
+        <div class="stack">
+          <article class="card highlight">
+            <div class="card-top">
+              <h3>Quem somos</h3>
+              <span class="label">Visão & essência</span>
+            </div>
+            <p>
+              A Rede Inconformados é a expressão da juventude da nossa igreja: um movimento
+              de adolescentes e jovens que decidiram não se conformar com uma vida superficial,
+              mas buscar Jesus em cada área da vida.
+            </p>
+            <ul class="bullets">
+              <li>Ambiente acolhedor e intencional para novas conexões.</li>
+              <li>Palavra bíblica relevante para a realidade da juventude.</li>
+              <li>Espaço para arte, criatividade e serviço.</li>
+            </ul>
 
-    <!-- ===================== FOOTER ====================== -->
-    <footer>
-      <div class="footer-inner">
+            <div class="mini-grid" aria-hidden="true">
+              <div class="mini-photo">
+                <img
+                  src="https://images.pexels.com/photos/976866/pexels-photo-976866.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  alt=""
+                  loading="lazy"
+                />
+                <div class="mini-caption">Cultos</div>
+              </div>
+              <div class="mini-photo">
+                <img
+                  src="https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                  alt=""
+                  loading="lazy"
+                />
+                <div class="mini-caption">Células</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Células de adolescentes</h3>
+              <span class="label">12–17 anos</span>
+            </div>
+            <p>
+              Reuniões semanais em casas, com conversa, Palavra, dinâmicas e oração,
+              pensadas para quem está no ensino fundamental e médio.
+            </p>
+            <ul class="bullets">
+              <li>Ambiente leve para novos amigos.</li>
+              <li>Temas que fazem sentido para o dia a dia.</li>
+            </ul>
+            <div class="whats-row">
+              <button class="btn btn-whats" data-whats="ado" type="button">
+                Falar no WhatsApp
+              </button>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Células de jovens</h3>
+              <span class="label">18+ anos</span>
+            </div>
+            <p>
+              Espaço para universitários, jovens profissionais e jovens casais,
+              com conversas profundas, discipulado e comunhão.
+            </p>
+            <ul class="bullets">
+              <li>Propósito, carreira, afetividade e vocação.</li>
+              <li>Ambiente seguro para perguntas e vulnerabilidade.</li>
+            </ul>
+            <div class="whats-row">
+              <button class="btn btn-whats" data-whats="jovens" type="button">
+                Falar no WhatsApp
+              </button>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Cultos da juventude</h3>
+              <span class="label">Mensais</span>
+            </div>
+            <p>
+              Encontros presenciais com música, Palavra, arte e muito espaço para o Espírito
+              Santo agir, reunindo todas as células e amigos convidados.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SECTION: EVENTS ====================== -->
+    <section id="section-events">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Próximos encontros</div>
+          <div class="section-title">Eventos em destaque</div>
+          <div class="section-desc">
+            Escolha um evento e confirme sua presença.
+          </div>
+        </div>
+
+        <div id="events-container" class="events"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ====================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-row">
         <span>© <span id="footer-year"></span> Rede Inconformados - Juventude</span>
         <span>Feito com carinho para a nova geração.</span>
       </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
-  <!-- ===================== MODAL MAPA ====================== -->
-  <div
-    class="modal-backdrop"
-    id="modal-map-backdrop"
-    aria-hidden="true"
-  >
-    <div class="modal">
-      <div class="modal-header">
-        <h3 class="modal-title">Local do evento</h3>
-        <button class="modal-close" data-modal-close="map">&times;</button>
+  <!-- ===================== MODAL: MAP ====================== -->
+  <div class="backdrop" id="modal-map-backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-map-title">
+      <div class="modal-head">
+        <div class="modal-title" id="modal-map-title">Local do evento</div>
+        <button class="icon-btn" data-close="map" type="button" aria-label="Fechar">&times;</button>
       </div>
       <div class="modal-body">
-        <div id="modal-map-location-name" class="badge-event-info"></div>
-        <div class="map-frame-wrapper">
-          <iframe
-            id="modal-map-frame"
-            class="map-frame"
-            allowfullscreen=""
-            loading="lazy"
-          ></iframe>
-        </div>
-        <div class="form-help" style="margin-top:0.5rem;">
+        <div id="modal-map-location-name" class="event-info"></div>
+        <iframe
+          id="modal-map-frame"
+          class="map-frame"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Mapa"
+        ></iframe>
+
+        <div class="hint" style="margin-top:.6rem;">
           Abra no mapa:
-          <a href="#" id="modal-map-open-link" target="_blank">Ver no Google Maps</a>
+          <a href="#" id="modal-map-open-link" target="_blank" rel="noopener noreferrer">Ver no Google Maps</a>
         </div>
       </div>
-      <div class="modal-footer">
-        <button class="btn btn-outline btn-sm" data-modal-close="map">Fechar</button>
+      <div class="modal-foot">
+        <button class="btn btn-ghost btn-small" data-close="map" type="button">Fechar</button>
       </div>
     </div>
   </div>
 
-  <!-- ===================== MODAL PRESENÇA ====================== -->
-  <div
-    class="modal-backdrop"
-    id="modal-presenca-backdrop"
-    aria-hidden="true"
-  >
-    <div class="modal">
-      <div class="modal-header">
-        <h3 class="modal-title">Confirmar presença</h3>
-        <button class="modal-close" data-modal-close="presenca">&times;</button>
+  <!-- ===================== MODAL: PRESENCE ====================== -->
+  <div class="backdrop" id="modal-presenca-backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-presenca-title">
+      <div class="modal-head">
+        <div class="modal-title" id="modal-presenca-title">Confirmar presença</div>
+        <button class="icon-btn" data-close="presenca" type="button" aria-label="Fechar">&times;</button>
       </div>
+
       <div class="modal-body">
-        <div id="modal-presenca-event-info" class="badge-event-info"></div>
+        <div id="modal-presenca-event-info" class="event-info"></div>
+
         <form id="form-presenca">
           <input type="hidden" id="presenca-event-id" />
-          <div class="form-field">
-            <label class="form-label" for="presenca-nome">Nome completo</label>
-            <input id="presenca-nome" class="form-input" type="text" />
+
+          <div class="field">
+            <label class="label" for="presenca-nome">Nome completo</label>
+            <input id="presenca-nome" type="text" autocomplete="name" placeholder="Ex: Maria Souza" />
           </div>
-          <div class="form-field">
-            <label class="form-label" for="presenca-telefone">Telefone (WhatsApp)</label>
-            <input id="presenca-telefone" class="form-input" type="tel" />
+
+          <div class="field">
+            <label class="label" for="presenca-telefone">Telefone (WhatsApp)</label>
+            <input id="presenca-telefone" type="tel" autocomplete="tel" placeholder="Ex: (11) 99999-0000" />
+            <div class="hint">Dica: pode ser com DDD. Ex: 11 99999-0000</div>
           </div>
-          <div class="form-field">
-            <label class="form-label" for="presenca-status">Você é:</label>
-            <select id="presenca-status" class="form-select">
+
+          <div class="field">
+            <label class="label" for="presenca-status">Você é:</label>
+            <select id="presenca-status">
               <option value="convidado">Convidado(a)</option>
               <option value="membro">Membro da igreja</option>
             </select>
           </div>
-          <div class="form-field">
-            <label class="form-label">Notificações</label>
-            <label class="form-check">
+
+          <div class="field">
+            <label class="label">Notificações</label>
+            <label class="check">
               <input type="checkbox" id="presenca-notificacoes" />
               <span>Quero receber lembretes sobre este evento.</span>
             </label>
           </div>
+
           <div id="presenca-feedback"></div>
         </form>
       </div>
-      <div class="modal-footer">
-        <button class="btn btn-outline btn-sm" data-modal-close="presenca">
-          Cancelar
-        </button>
-        <button class="btn btn-primary btn-sm" id="presenca-submit">
-          Confirmar presença
-        </button>
+
+      <div class="modal-foot">
+        <button class="btn btn-ghost btn-small" data-close="presenca" type="button">Cancelar</button>
+        <button class="btn btn-primary btn-small" id="presenca-submit" type="button">Confirmar presença</button>
       </div>
     </div>
   </div>
 
   <!-- ===================== JAVASCRIPT ====================== -->
   <script>
-    // URL do Apps Script Web App (substitua pela sua)
-    const SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyFTYwYy_9KVXwhSn9XsjL3HimzONZ5QayYGToAP8CxqreSHxDQ9SVKtg3Xa0bdxfyV/exec";
+    /* =========================================================
+      CONFIG
+    ========================================================== */
 
-    // 1) Eventos estáticos (em produção viriam de uma API)
+    // URL do seu Apps Script Web App (/exec)
+    const SHEETS_WEBHOOK_URL =
+      "https://script.google.com/macros/s/AKfycbyFTYwYy_9KVXwhSn9XsjL3HimzONZ5QayYGToAP8CxqreSHxDQ9SVKtg3Xa0bdxfyV/exec";
+
+    // WhatsApp (troque pelos números reais)
+    const WHATS_LINKS = {
+      ado:
+        "https://wa.me/5599999999999?text=" +
+        encodeURIComponent("Olá! Quero conhecer a Célula de Adolescentes da Rede Inconformados."),
+      jovens:
+        "https://wa.me/5599888888888?text=" +
+        encodeURIComponent("Olá! Quero conhecer a Célula de Jovens da Rede Inconformados.")
+    };
+
+    // Eventos (exemplo)
     const EVENTS = [
       {
         id: "1",
         title: "Culto da Juventude · Inconformados",
-        shortDescription:
-          "Uma noite de adoração, Palavra e comunhão para adolescentes e jovens.",
+        shortDescription: "Uma noite de adoração, Palavra e comunhão para adolescentes e jovens.",
         locationName: "Igreja Exemplo - Auditório Principal",
         locationMapsEmbedUrl:
           "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!2d-46.6333094!3d-23.5505199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zRXhlbXBsbyUyMElncmVqYQ!5e0!3m2!1spt-BR!2sbr!4v1700000000000",
         locationMapsLink: "https://www.google.com/maps",
         dateTime: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString(),
         image:
-          "https://images.pexels.com/photos/167636/pexels-photo-167636.jpeg?auto=compress&cs=tinysrgb&w=800"
+          "https://images.pexels.com/photos/167636/pexels-photo-167636.jpeg?auto=compress&cs=tinysrgb&w=1400"
       },
       {
         id: "2",
         title: "Encontro de Células · Adolescentes",
-        shortDescription:
-          "Integração de todas as células de adolescentes com louvor, Palavra e dinâmicas.",
+        shortDescription: "Integração de todas as células de adolescentes com louvor, Palavra e dinâmicas.",
         locationName: "Salão de Eventos da Igreja",
         locationMapsEmbedUrl:
           "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!2d-46.6333094!3d-23.5505199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zRXhlbXBsbyUyMFNhbMOjbyUyMERlJTIwRXZlbnRvcyE!5e0!3m2!1spt-BR!2sbr!4v1700000000001",
         locationMapsLink: "https://www.google.com/maps",
         dateTime: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString(),
         image:
-          "https://images.pexels.com/photos/4088168/pexels-photo-4088168.jpeg?auto=compress&cs=tinysrgb&w=800"
+          "https://images.pexels.com/photos/4088168/pexels-photo-4088168.jpeg?auto=compress&cs=tinysrgb&w=1400"
       },
       {
         id: "3",
         title: "Conferência Inconformados",
-        shortDescription:
-          "Conferência com convidados especiais, Palavra, arte, oficinas e muita presença de Deus.",
+        shortDescription: "Conferência com convidados especiais, Palavra, arte, oficinas e muita presença de Deus.",
         locationName: "Centro de Convenções Exemplo",
         locationMapsEmbedUrl:
           "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!2d-46.6333094!3d-23.5505199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zU2VnYW1vcyUyMENlbnRybyUyMERlJTIwQ29udmVuw7fDtWVz!5e0!3m2!1spt-BR!2sbr!4v1700000000002",
         locationMapsLink: "https://www.google.com/maps",
         dateTime: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000).toISOString(),
         image:
-          "https://images.pexels.com/photos/1647161/pexels-photo-1647161.jpeg?auto=compress&cs=tinysrgb&w=800"
+          "https://images.pexels.com/photos/1647161/pexels-photo-1647161.jpeg?auto=compress&cs=tinysrgb&w=1400"
       }
     ];
 
-    // 2) Utilitários
+    /* =========================================================
+      HELPERS
+    ========================================================== */
 
     function formatEventDate(isoString) {
       if (!isoString) return "Data em breve";
-      const date = new Date(isoString);
-      if (isNaN(date.getTime())) return "Data em breve";
-      const options = {
+      const d = new Date(isoString);
+      if (isNaN(d.getTime())) return "Data em breve";
+      return d.toLocaleString("pt-BR", {
         weekday: "short",
         day: "2-digit",
         month: "short",
         hour: "2-digit",
         minute: "2-digit"
-      };
-      return date.toLocaleString("pt-BR", options);
+      });
     }
 
-    function scrollToSection(selector) {
+    function scrollToSection(selector){
       const el = document.querySelector(selector);
       if (!el) return;
-      const y = el.getBoundingClientRect().top + window.scrollY - 80;
+      const y = el.getBoundingClientRect().top + window.scrollY - 78;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
 
-    // 3) Navegação por âncoras
+    function setMsg(el, type, text){
+      el.innerHTML = `<div class="msg ${type}">${text}</div>`;
+    }
 
-    document.querySelectorAll("[data-scroll]").forEach((btn) => {
+    function normalizePhone(raw){
+      // mantém dígitos e + (bem simples)
+      const trimmed = (raw || "").trim();
+      const plus = trimmed.startsWith("+") ? "+" : "";
+      const digits = trimmed.replace(/[^\d]/g, "");
+      return plus + digits;
+    }
+
+    /* =========================================================
+      NAV
+    ========================================================== */
+    document.querySelectorAll("[data-scroll]").forEach(btn => {
       btn.addEventListener("click", () => {
         const target = btn.getAttribute("data-scroll");
         if (target) scrollToSection(target);
       });
     });
 
-    // 4) Renderizar eventos
-
+    /* =========================================================
+      EVENTS RENDER
+    ========================================================== */
     const eventsContainer = document.getElementById("events-container");
 
-    function renderEvents() {
-      if (!EVENTS.length) {
-        eventsContainer.innerHTML =
-          '<p class="form-help">Nenhum evento cadastrado no momento.</p>';
+    function renderEvents(){
+      if (!EVENTS.length){
+        eventsContainer.innerHTML = `<div class="hint">Nenhum evento cadastrado no momento.</div>`;
         return;
       }
 
       eventsContainer.innerHTML = "";
 
-      EVENTS.forEach((evt) => {
+      EVENTS.forEach(evt => {
         const card = document.createElement("article");
-        card.className = "event-card";
+        card.className = "event";
 
         const media = document.createElement("div");
         media.className = "event-media";
-        media.style.backgroundImage = `url('${evt.image}')`;
-
-        const overlay = document.createElement("div");
-        overlay.className = "event-media-overlay";
-
-        const inner = document.createElement("div");
-        inner.className = "event-media-inner";
-
-        const chip = document.createElement("span");
-        chip.className = "event-chip";
-        chip.textContent = "Próximo evento";
-
-        const date = document.createElement("div");
-        date.className = "event-date";
-        date.textContent = formatEventDate(evt.dateTime);
-
-        inner.appendChild(chip);
-        inner.appendChild(date);
-        media.appendChild(overlay);
-        media.appendChild(inner);
+        media.innerHTML = `
+          <img src="${evt.image}" alt="" loading="lazy" />
+          <div class="event-overlay">
+            <span class="event-chip">Próximo evento</span>
+            <div class="event-date">${formatEventDate(evt.dateTime)}</div>
+          </div>
+        `;
 
         const body = document.createElement("div");
         body.className = "event-body";
+        body.innerHTML = `
+          <div class="event-title">${evt.title}</div>
+          <div class="event-desc">${evt.shortDescription || ""}</div>
+          <div class="event-loc">${evt.locationName || ""}</div>
+        `;
 
-        const title = document.createElement("h3");
-        title.className = "event-title";
-        title.textContent = evt.title;
+        const actions = document.createElement("div");
+        actions.className = "event-actions";
 
-        const desc = document.createElement("p");
-        desc.className = "event-desc";
-        desc.textContent = evt.shortDescription || "";
+        const btnLoc = document.createElement("button");
+        btnLoc.className = "btn btn-ghost btn-small";
+        btnLoc.type = "button";
+        btnLoc.textContent = "Localização";
+        btnLoc.addEventListener("click", () => openMapModal(evt));
 
-        const loc = document.createElement("p");
-        loc.className = "event-location";
-        loc.textContent = evt.locationName || "";
+        const btnOk = document.createElement("button");
+        btnOk.className = "btn btn-primary btn-small";
+        btnOk.type = "button";
+        btnOk.textContent = "Confirmar presença";
+        btnOk.addEventListener("click", () => openPresencaModal(evt));
 
-        body.appendChild(title);
-        body.appendChild(desc);
-        body.appendChild(loc);
-
-        const footer = document.createElement("div");
-        footer.className = "event-footer";
-
-        const btnLocal = document.createElement("button");
-        btnLocal.className = "btn btn-outline btn-sm";
-        btnLocal.textContent = "Localização";
-        btnLocal.addEventListener("click", () => openMapModal(evt));
-
-        const btnPresenca = document.createElement("button");
-        btnPresenca.className = "btn btn-primary btn-sm";
-        btnPresenca.textContent = "Confirmar presença";
-        btnPresenca.addEventListener("click", () => openPresencaModal(evt));
-
-        footer.appendChild(btnLocal);
-        footer.appendChild(btnPresenca);
+        actions.appendChild(btnLoc);
+        actions.appendChild(btnOk);
 
         card.appendChild(media);
         card.appendChild(body);
-        card.appendChild(footer);
+        card.appendChild(actions);
 
         eventsContainer.appendChild(card);
       });
     }
 
-    // 5) Modal de mapa
-
+    /* =========================================================
+      MODAL MAP
+    ========================================================== */
     const modalMapBackdrop = document.getElementById("modal-map-backdrop");
     const modalMapFrame = document.getElementById("modal-map-frame");
     const modalMapLocationName = document.getElementById("modal-map-location-name");
     const modalMapOpenLink = document.getElementById("modal-map-open-link");
 
-    function openMapModal(evt) {
+    function openMapModal(evt){
       modalMapLocationName.textContent = evt.locationName || "Local do evento";
       modalMapFrame.src = evt.locationMapsEmbedUrl || "";
       modalMapOpenLink.href = evt.locationMapsLink || "#";
-      modalMapBackdrop.classList.add("is-visible");
+      modalMapBackdrop.classList.add("show");
       modalMapBackdrop.setAttribute("aria-hidden", "false");
     }
 
-    function closeMapModal() {
-      modalMapBackdrop.classList.remove("is-visible");
+    function closeMapModal(){
+      modalMapBackdrop.classList.remove("show");
       modalMapBackdrop.setAttribute("aria-hidden", "true");
       modalMapFrame.src = "";
     }
 
-    document.querySelectorAll("[data-modal-close='map']").forEach((btn) => {
-      btn.addEventListener("click", closeMapModal);
-    });
-
-    // 6) Modal de presença
-
+    /* =========================================================
+      MODAL PRESENÇA
+    ========================================================== */
     const modalPresencaBackdrop = document.getElementById("modal-presenca-backdrop");
     const presencaEventIdInput = document.getElementById("presenca-event-id");
     const presencaNomeInput = document.getElementById("presenca-nome");
@@ -1281,155 +1198,147 @@
     const presencaSubmitBtn = document.getElementById("presenca-submit");
     const presencaEventInfo = document.getElementById("modal-presenca-event-info");
 
-    function openPresencaModal(evt) {
+    function openPresencaModal(evt){
       presencaEventIdInput.value = evt.id;
       presencaNomeInput.value = "";
       presencaTelefoneInput.value = "";
       presencaStatusSelect.value = "convidado";
       presencaNotifCheckbox.checked = false;
       presencaFeedback.innerHTML = "";
-      presencaEventInfo.textContent =
-        evt.title + " • " + formatEventDate(evt.dateTime);
+      presencaEventInfo.textContent = `${evt.title} • ${formatEventDate(evt.dateTime)}`;
 
-      modalPresencaBackdrop.classList.add("is-visible");
+      modalPresencaBackdrop.classList.add("show");
       modalPresencaBackdrop.setAttribute("aria-hidden", "false");
+
+      // foco no primeiro campo (melhora UX no celular)
+      setTimeout(() => presencaNomeInput.focus(), 50);
     }
 
-    function closePresencaModal() {
-      modalPresencaBackdrop.classList.remove("is-visible");
+    function closePresencaModal(){
+      modalPresencaBackdrop.classList.remove("show");
       modalPresencaBackdrop.setAttribute("aria-hidden", "true");
     }
 
-    document
-      .querySelectorAll("[data-modal-close='presenca']")
-      .forEach((btn) => btn.addEventListener("click", closePresencaModal));
+    /* =========================================================
+      CLOSE MODALS: buttons + click backdrop + ESC
+    ========================================================== */
+    document.querySelectorAll("[data-close='map']").forEach(btn => btn.addEventListener("click", closeMapModal));
+    document.querySelectorAll("[data-close='presenca']").forEach(btn => btn.addEventListener("click", closePresencaModal));
 
-    [modalMapBackdrop, modalPresencaBackdrop].forEach((backdrop) => {
+    [modalMapBackdrop, modalPresencaBackdrop].forEach(backdrop => {
       backdrop.addEventListener("click", (e) => {
-        if (e.target === backdrop) {
-          if (backdrop === modalMapBackdrop) closeMapModal();
-          if (backdrop === modalPresencaBackdrop) closePresencaModal();
-        }
+        if (e.target !== backdrop) return;
+        if (backdrop === modalMapBackdrop) closeMapModal();
+        if (backdrop === modalPresencaBackdrop) closePresencaModal();
       });
     });
 
     window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
+      if (e.key === "Escape"){
         closeMapModal();
         closePresencaModal();
       }
     });
 
-    // 7) Envio para Google Sheets (Apps Script)
-
-    presencaSubmitBtn.addEventListener("click", async (e) => {
-      e.preventDefault();
-
+    /* =========================================================
+      SUBMIT PRESENÇA (CORRIGIDO)
+      - removeu a verificação bugada que travava sempre
+      - validação correta da URL
+      - envia JSON como text/plain para evitar preflight em muitos casos
+    ========================================================== */
+    async function sendPresence(){
       const name = presencaNomeInput.value.trim();
-      const phone = presencaTelefoneInput.value.trim();
+      const phoneRaw = presencaTelefoneInput.value.trim();
+      const phone = normalizePhone(phoneRaw);
       const status = presencaStatusSelect.value;
       const wantsNotifications = presencaNotifCheckbox.checked;
       const eventId = presencaEventIdInput.value;
-      const event = EVENTS.find((ev) => ev.id === eventId);
+      const event = EVENTS.find(ev => ev.id === eventId);
       const eventTitle = event ? event.title : "";
 
       presencaFeedback.innerHTML = "";
 
-      if (!name || !phone) {
-        presencaFeedback.innerHTML =
-          '<div class="form-error">Nome e telefone são obrigatórios.</div>';
+      if (!name || !phoneRaw){
+        setMsg(presencaFeedback, "error", "Nome e telefone são obrigatórios.");
         return;
       }
 
-if (!SHEETS_WEBHOOK_URL || SHEETS_WEBHOOK_URL.includes("COLE_AQUI")) {
-  presencaFeedback.innerHTML =
-    '<div class="form-error">Configuração do Apps Script pendente. Cole a URL na constante SHEETS_WEBHOOK_URL.</div>';
-  return;
-}
+      // validação simples do telefone: ao menos 10 dígitos (DDD + número)
+      const phoneDigits = phone.replace(/[^\d]/g, "");
+      if (phoneDigits.length < 10){
+        setMsg(presencaFeedback, "error", "Digite um telefone válido com DDD. Ex: (11) 99999-0000");
+        return;
+      }
 
-      const payload = {
-        eventId,
-        eventTitle,
-        name,
-        phone,
-        status,
-        wantsNotifications
-      };
+      // ✅ validação correta da URL do webhook
+      if (!SHEETS_WEBHOOK_URL || SHEETS_WEBHOOK_URL.includes("COLE_AQUI")){
+        setMsg(presencaFeedback, "error", "Configuração pendente: cole a URL do Apps Script na constante SHEETS_WEBHOOK_URL.");
+        return;
+      }
+
+      const payload = { eventId, eventTitle, name, phone: phoneRaw, status, wantsNotifications };
 
       presencaSubmitBtn.disabled = true;
       presencaSubmitBtn.textContent = "Enviando...";
 
-      try {
+      try{
         const res = await fetch(SHEETS_WEBHOOK_URL, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          // text/plain reduz preflight em muitos cenários e continua parseável no Apps Script
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
           body: JSON.stringify(payload)
         });
 
-        let ok = true;
+        // tenta ler JSON, mas se não der, segue pelo status
         let data = null;
+        try { data = await res.json(); } catch(_) {}
 
-        try {
-          data = await res.json();
-        } catch (_) {
-          ok = res.ok;
+        if ((data && data.success === false) || (!res.ok && !data)){
+          const msg = (data && data.message) ? data.message : "Erro ao registrar presença. Tente novamente.";
+          setMsg(presencaFeedback, "error", msg);
+          return;
         }
 
-        if (!ok || (data && data.success === false)) {
-          const msg =
-            (data && data.message) || "Erro ao registrar presença. Tente novamente.";
-          presencaFeedback.innerHTML =
-            '<div class="form-error">' + msg + "</div>";
-        } else {
-          presencaFeedback.innerHTML =
-            '<div class="form-success">Presença registrada! Obrigado por confirmar.</div>';
-          console.log("Enviado para planilha:", payload, data);
-          setTimeout(() => {
-            closePresencaModal();
-          }, 1200);
-        }
-      } catch (err) {
-        console.error(err);
-        presencaFeedback.innerHTML =
-          '<div class="form-error">Erro de conexão. Verifique sua internet e tente novamente.</div>';
-      } finally {
+        setMsg(presencaFeedback, "success", "Presença registrada! Obrigado por confirmar.");
+        setTimeout(() => closePresencaModal(), 1100);
+
+      } catch(err){
+        console.error("Erro no fetch:", err);
+        setMsg(presencaFeedback, "error", "Erro de conexão ao enviar. Verifique sua internet e tente novamente.");
+      } finally{
         presencaSubmitBtn.disabled = false;
         presencaSubmitBtn.textContent = "Confirmar presença";
       }
+    }
+
+    presencaSubmitBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      sendPresence();
     });
 
-    // 8) WhatsApp links
+    // Enviar com Enter (melhora no mobile com teclado)
+    document.getElementById("form-presenca").addEventListener("keydown", (e) => {
+      if (e.key === "Enter"){
+        e.preventDefault();
+        sendPresence();
+      }
+    });
 
-    const WHATS_LINKS = {
-      ado:
-        "https://wa.me/5599999999999?text=" +
-        encodeURIComponent(
-          "Olá! Quero conhecer a Célula de Adolescentes da Rede Inconformados."
-        ),
-      jovens:
-        "https://wa.me/5599888888888?text=" +
-        encodeURIComponent(
-          "Olá! Quero conhecer a Célula de Jovens da Rede Inconformados."
-        )
-    };
-
-    document.querySelectorAll(".btn-whats").forEach((btn) => {
+    /* =========================================================
+      WHATS
+    ========================================================== */
+    document.querySelectorAll("[data-whats]").forEach(btn => {
       btn.addEventListener("click", () => {
-        const type = btn.getAttribute("data-whats");
-        const url = WHATS_LINKS[type];
-        if (url) window.open(url, "_blank");
+        const key = btn.getAttribute("data-whats");
+        const url = WHATS_LINKS[key];
+        if (url) window.open(url, "_blank", "noopener,noreferrer");
       });
     });
 
-    // 9) Footer ano
-
-    document.getElementById("footer-year").textContent =
-      new Date().getFullYear();
-
-    // 10) Init
-
+    /* =========================================================
+      FOOTER YEAR + INIT
+    ========================================================== */
+    document.getElementById("footer-year").textContent = new Date().getFullYear();
     renderEvents();
   </script>
 </body>
