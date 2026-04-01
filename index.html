@@ -6,72 +6,87 @@
   <title>Rede Inconformados - Juventude</title>
   <meta name="description" content="Rede Inconformados - Juventude, células, cultos e eventos em destaque." />
 
+  <!-- Pré-conexão para fontes do Google para melhor performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Importação da fonte Inter para um visual moderno e limpo -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
     /* =========================================================
-      MOBILE-FIRST • UI MODERNA • LIMPA • PERFORMANCE OK
+      RESET & BASE
+      Definições de variáveis CSS, reset básico e estilos globais.
     ========================================================== */
-
     :root{
-      --bg: #060607;
-      --bg2: #0b0c0f;
-      --card: rgba(255,255,255,.04);
-      --card2: rgba(255,255,255,.06);
-      --text: #ffffff;
-      --muted: rgba(255,255,255,.68);
-      --muted2: rgba(255,255,255,.5);
-      --border: rgba(255,255,255,.10);
-      --shadow: 0 18px 45px rgba(0,0,0,.55);
+      --bg: #060607; /* Cor de fundo principal */
+      --bg2: #0b0c0f; /* Cor de fundo secundária (mais escura) */
+      --card: rgba(255,255,255,.04); /* Fundo de cards */
+      --card-hover: rgba(255,255,255,.06); /* Fundo de cards ao passar o mouse */
+      --text: #ffffff; /* Cor do texto principal */
+      --muted: rgba(255,255,255,.68); /* Cor do texto secundário/fraco */
+      --muted2: rgba(255,255,255,.5); /* Cor do texto ainda mais fraco */
+      --border: rgba(255,255,255,.10); /* Cor das bordas */
+      --shadow: 0 18px 45px rgba(0,0,0,.55); /* Sombra forte para elementos em destaque */
+      --shadow-sm: 0 8px 20px rgba(0,0,0,.35); /* Sombra mais suave para hover/interatividade */
 
-      --accent: #ffd400;
-      --accent2: #ff9100;
-      --accentSoft: rgba(255, 212, 0, .14);
+      --accent: #ffd400; /* Cor de destaque principal (amarelo) */
+      --accent2: #ff9100; /* Cor de destaque secundária (laranja) */
+      --accentSoft: rgba(255, 212, 0, .14); /* Versão suave da cor de destaque */
 
-      --success: #00d27a;
-      --error: #ff4b4b;
+      --success: #00d27a; /* Cor para mensagens de sucesso */
+      --error: #ff4b4b; /* Cor para mensagens de erro */
 
-      --r12: 12px;
-      --r16: 16px;
-      --r20: 20px;
-      --pill: 999px;
+      --r12: 12px; /* Raio de borda pequeno */
+      --r16: 16px; /* Raio de borda médio */
+      --r20: 20px; /* Raio de borda grande */
+      --r24: 24px; /* Raio de borda extra grande */
+      --pill: 999px; /* Raio de borda para formato de pílula */
 
-      --max: 980px;
+      --max: 1080px; /* Largura máxima do conteúdo para desktop */
 
-      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      --font-body: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; /* Fonte para o corpo do texto */
+      --font-heading: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; /* Fonte para títulos */
     }
 
+    /* Reset de margens e paddings padrão do navegador */
     *{ box-sizing:border-box; margin:0; padding:0; }
-    html, body{ height:100%; }
+    /* Scroll suave para âncoras */
+    html{ scroll-behavior: smooth; }
+    /* Estilos base para o corpo da página */
     body{
-      font-family: var(--font);
+      font-family: var(--font-body);
       color: var(--text);
       background:
         radial-gradient(900px 520px at 50% -10%, rgba(255, 212, 0, .16), transparent 60%),
         radial-gradient(900px 520px at 20% 10%, rgba(255, 145, 0, .10), transparent 60%),
         linear-gradient(180deg, var(--bg2), var(--bg));
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-      line-height: 1.55;
-      overflow-x:hidden;
+      -webkit-font-smoothing: antialiased; /* Suavização de fonte para melhor leitura */
+      text-rendering: optimizeLegibility; /* Otimização de renderização de texto */
+      line-height: 1.6; /* Altura da linha para melhor legibilidade */
+      overflow-x:hidden; /* Evita scroll horizontal indesejado */
     }
 
-    a{ color: var(--accent); text-decoration: none; }
-    a:hover{ text-decoration: underline; }
+    /* Estilos para links */
+    a{ color: var(--accent); text-decoration: none; transition: color .2s ease; }
+    a:hover{ text-decoration: underline; color: var(--accent2); }
+    /* Estilos para imagens */
     img{ display:block; max-width:100%; height:auto; }
 
+    /* Container centralizado para o conteúdo */
     .container{
-      width: min(var(--max), calc(100% - 2rem));
+      width: min(var(--max), calc(100% - 2rem)); /* Largura máxima com padding lateral */
       margin: 0 auto;
     }
 
     /* ===================== TOPBAR ====================== */
-
     .topbar{
-      position: sticky;
+      position: sticky; /* Fixa o topbar no topo ao rolar */
       top: 0;
       z-index: 30;
-      background: rgba(6,6,7,.72);
-      backdrop-filter: blur(18px);
+      background: rgba(6,6,7,.72); /* Fundo semi-transparente */
+      backdrop-filter: blur(18px); /* Efeito de blur no fundo */
       border-bottom: 1px solid var(--border);
+      transition: background .3s ease, border-color .3s ease; /* Transições suaves */
     }
 
     .topbar-inner{
@@ -86,17 +101,17 @@
       display:flex;
       align-items:center;
       gap: .75rem;
-      min-width: 0;
+      min-width: 0; /* Permite que o texto encurte se necessário */
     }
 
     .brand-logo{
-      width: 40px;
-      height: 40px;
+      width: 44px; /* Levemente maior */
+      height: 44px; /* Levemente maior */
       border-radius: 14px;
       overflow:hidden;
       border: 1px solid var(--border);
       background: #000;
-      flex: 0 0 auto;
+      flex: 0 0 auto; /* Impede que o logo encolha */
     }
     .brand-logo img{
       width:100%;
@@ -111,15 +126,16 @@
       min-width: 0;
     }
     .brand-title{
-      font-size: .75rem;
-      letter-spacing: .18em;
+      font-size: .8rem; /* Levemente maior */
+      letter-spacing: .16em; /* Ajustado */
       text-transform: uppercase;
       white-space: nowrap;
       overflow:hidden;
-      text-overflow: ellipsis;
+      text-overflow: ellipsis; /* Adiciona reticências se o texto for muito longo */
+      font-weight: 600;
     }
     .brand-subtitle{
-      font-size: .78rem;
+      font-size: .82rem; /* Levemente maior */
       color: var(--muted);
       white-space: nowrap;
       overflow:hidden;
@@ -129,21 +145,22 @@
     .topbar-actions{
       display:flex;
       align-items:center;
-      gap: .5rem;
+      gap: .6rem; /* Ajustado */
       flex: 0 0 auto;
     }
 
     .chip{
-      font-size: .62rem;
-      letter-spacing: .18em;
+      font-size: .68rem; /* Levemente maior */
+      letter-spacing: .16em; /* Ajustado */
       text-transform: uppercase;
-      padding: .35rem .65rem;
+      padding: .4rem .75rem; /* Ajustado */
       border-radius: var(--pill);
       border: 1px solid var(--border);
       background: rgba(0,0,0,.35);
       color: rgba(255,255,255,.85);
       white-space: nowrap;
-      display:none; /* some no mobile pequeno */
+      display:none; /* Esconde em mobile pequeno por padrão */
+      font-weight: 500;
     }
 
     .btn{
@@ -151,22 +168,24 @@
       background: rgba(255,255,255,.04);
       color: var(--text);
       border-radius: var(--pill);
-      padding: .78rem 1.05rem;
-      font-size: .74rem;
-      letter-spacing: .16em;
+      padding: .8rem 1.1rem; /* Ajustado */
+      font-size: .78rem; /* Levemente maior */
+      letter-spacing: .14em; /* Ajustado */
       text-transform: uppercase;
       cursor:pointer;
-      transition: transform .12s ease, background .2s ease, border-color .2s ease;
-      min-height: 44px;
+      transition: transform .15s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease; /* Transições para animações */
+      min-height: 48px; /* Levemente maior para facilitar o toque */
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap: .5rem;
-      user-select:none;
-      -webkit-tap-highlight-color: transparent;
+      gap: .6rem; /* Ajustado */
+      user-select:none; /* Impede seleção de texto */
+      -webkit-tap-highlight-color: transparent; /* Remove highlight em mobile */
+      font-weight: 600;
     }
-    .btn:hover{ transform: translateY(-1px); }
-    .btn:disabled{ opacity:.65; cursor:not-allowed; transform:none; }
+    .btn:hover{ transform: translateY(-2px); box-shadow: var(--shadow-sm); } /* Animação e sombra ao hover */
+    .btn:active{ transform: translateY(0); box-shadow: none; } /* Efeito de clique */
+    .btn:disabled{ opacity:.65; cursor:not-allowed; transform:none; box-shadow: none; }
 
     .btn-primary{
       background: linear-gradient(90deg, var(--accent), var(--accent2));
@@ -174,46 +193,52 @@
       color:#0b0b0c;
       font-weight: 700;
     }
-    .btn-primary:hover{ background: linear-gradient(90deg, #ffe04f, #ffab3d); }
+    .btn-primary:hover{ background: linear-gradient(90deg, #ffe04f, #ffab3d); border-color: rgba(255, 212, 0, .65); }
 
     .btn-ghost{
       background: transparent;
       border-color: var(--border);
     }
+    .btn-ghost:hover{ background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.2); }
 
     .btn-small{
-      padding: .62rem .95rem;
-      font-size: .68rem;
+      padding: .65rem 1rem; /* Ajustado */
+      font-size: .72rem; /* Ajustado */
+      min-height: 40px;
     }
 
     /* ===================== HERO ====================== */
-
     .hero{
-      padding: 1.2rem 0 1.4rem;
+      padding: 1.5rem 0 2rem; /* Ajustado */
     }
 
     .hero-grid{
       display:grid;
       grid-template-columns: 1fr;
-      gap: 1rem;
+      gap: 1.5rem; /* Ajustado */
       align-items: stretch;
     }
 
     .hero-media{
       position: relative;
-      border-radius: 22px;
+      border-radius: var(--r24); /* Levemente maior */
       overflow:hidden;
       border: 1px solid var(--border);
       background: #000;
       box-shadow: var(--shadow);
-      min-height: 220px;
+      min-height: 260px; /* Levemente maior */
     }
     .hero-media img{
       width:100%;
-      height: 260px;
+      height: 300px; /* Levemente maior */
       object-fit: cover;
       filter: saturate(1.1) contrast(1.05);
       transform: scale(1.02);
+      transition: transform .3s ease, filter .3s ease; /* Animação na imagem */
+    }
+    .hero-media:hover img{
+      transform: scale(1.05);
+      filter: saturate(1.15) contrast(1.08);
     }
     .hero-media::after{
       content:"";
@@ -224,51 +249,59 @@
     }
     .hero-badge{
       position:absolute;
-      left: 14px;
-      bottom: 14px;
-      right: 14px;
+      left: 16px; /* Ajustado */
+      bottom: 16px; /* Ajustado */
+      right: 16px; /* Ajustado */
       border: 1px solid rgba(255,255,255,.22);
       background: rgba(0,0,0,.58);
-      border-radius: 16px;
-      padding: .7rem .85rem;
+      border-radius: var(--r16); /* Ajustado */
+      padding: .8rem .95rem; /* Ajustado */
       display:flex;
       flex-direction:column;
-      gap: .22rem;
-      backdrop-filter: blur(10px);
+      gap: .25rem; /* Ajustado */
+      backdrop-filter: blur(12px); /* Levemente maior */
+      box-shadow: var(--shadow-sm);
     }
     .hero-badge-top{
-      font-size: .62rem;
-      letter-spacing: .20em;
+      font-size: .68rem; /* Levemente maior */
+      letter-spacing: .18em; /* Ajustado */
       text-transform: uppercase;
       color: var(--muted);
+      font-weight: 500;
     }
     .hero-badge-main{
-      font-size: .95rem;
+      font-size: 1.05rem; /* Levemente maior */
       font-weight: 750;
       line-height: 1.2;
     }
 
     .hero-card{
-      border-radius: 22px;
+      border-radius: var(--r24); /* Levemente maior */
       border: 1px solid var(--border);
       background: rgba(255,255,255,.03);
-      padding: 1rem 1rem 1.05rem;
+      padding: 1.5rem; /* Ajustado */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .tagline{
-      font-size: .66rem;
-      letter-spacing: .22em;
+      font-size: .7rem; /* Levemente maior */
+      letter-spacing: .2em; /* Ajustado */
       text-transform: uppercase;
       color: rgba(255, 212, 0, .95);
-      margin-bottom: .55rem;
+      margin-bottom: .6rem; /* Ajustado */
+      font-weight: 600;
     }
 
     h1{
-      font-size: clamp(1.35rem, 4.4vw, 2.05rem);
-      line-height: 1.08;
-      letter-spacing: .02em;
+      font-family: var(--font-heading);
+      font-size: clamp(1.6rem, 5vw, 2.6rem); /* Ajustado para maior impacto e responsividade */
+      line-height: 1.1;
+      letter-spacing: .01em;
       text-transform: uppercase;
-      margin-bottom: .55rem;
+      margin-bottom: .8rem; /* Ajustado */
+      font-weight: 800;
     }
     h1 .grad{
       background: linear-gradient(90deg, var(--accent), var(--accent2));
@@ -279,75 +312,85 @@
 
     .subtitle{
       color: var(--muted);
-      font-size: .95rem;
-      margin-bottom: .9rem;
+      font-size: 1rem; /* Levemente maior */
+      margin-bottom: 1.2rem; /* Ajustado */
     }
 
     .hero-actions{
       display:flex;
       flex-wrap: wrap;
-      gap: .55rem;
-      margin-bottom: .8rem;
+      gap: .7rem; /* Ajustado */
+      margin-bottom: 1rem; /* Ajustado */
     }
 
     .meta-row{
       display:flex;
       flex-wrap: wrap;
-      gap: .45rem;
+      gap: .5rem; /* Ajustado */
     }
     .meta-pill{
-      font-size: .62rem;
-      letter-spacing: .18em;
+      font-size: .68rem; /* Levemente maior */
+      letter-spacing: .16em; /* Ajustado */
       text-transform: uppercase;
-      padding: .35rem .7rem;
+      padding: .4rem .8rem; /* Ajustado */
       border: 1px solid var(--border);
       border-radius: var(--pill);
-      color: rgba(255,255,255,.72);
+      color: rgba(255,255,255,.78); /* Ajustado */
       background: rgba(255,255,255,.03);
+      font-weight: 500;
     }
 
     /* ===================== SECTIONS ====================== */
-
     section{
-      padding: .6rem 0 1.2rem;
+      padding: 1.5rem 0 2rem; /* Ajustado */
     }
 
     .section-head{
       display:flex;
       flex-direction:column;
-      gap: .25rem;
-      margin: .4rem 0 .85rem;
+      gap: .3rem; /* Ajustado */
+      margin: .6rem 0 1.2rem; /* Ajustado */
     }
     .section-kicker{
-      font-size: .64rem;
-      letter-spacing: .22em;
+      font-size: .7rem; /* Levemente maior */
+      letter-spacing: .2em; /* Ajustado */
       text-transform: uppercase;
       color: rgba(255, 212, 0, .95);
+      font-weight: 600;
     }
     .section-title{
-      font-size: .98rem;
-      letter-spacing: .22em;
+      font-family: var(--font-heading);
+      font-size: 1.1rem; /* Levemente maior */
+      letter-spacing: .18em; /* Ajustado */
       text-transform: uppercase;
-      color: rgba(255,255,255,.92);
+      color: rgba(255,255,255,.95); /* Ajustado */
+      font-weight: 700;
     }
     .section-desc{
-      font-size: .95rem;
+      font-size: 1rem; /* Levemente maior */
       color: var(--muted);
+      max-width: 700px; /* Limita largura para melhor leitura */
     }
 
     /* ===================== INFO CARDS ====================== */
-
     .stack{
       display:grid;
       grid-template-columns: 1fr;
-      gap: .85rem;
+      gap: 1rem; /* Ajustado */
     }
 
     .card{
       border-radius: var(--r20);
       border: 1px solid var(--border);
       background: var(--card);
-      padding: 1rem;
+      padding: 1.2rem; /* Ajustado */
+      transition: background .2s ease, border-color .2s ease, transform .15s ease, box-shadow .15s ease; /* Animações de hover */
+    }
+    .card:hover{
+      background: var(--card-hover);
+      border-color: rgba(255,255,255,.15);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
     }
 
     .card.highlight{
@@ -355,101 +398,87 @@
         radial-gradient(700px 220px at 20% 0%, rgba(255, 212, 0, .12), transparent 55%),
         var(--card);
     }
+    .card.highlight:hover{
+      background:
+        radial-gradient(700px 220px at 20% 0%, rgba(255, 212, 0, .16), transparent 50%),
+        var(--card-hover);
+    }
 
     .card-top{
       display:flex;
       align-items:flex-start;
       justify-content: space-between;
-      gap: .75rem;
-      margin-bottom: .35rem;
+      gap: .8rem; /* Ajustado */
+      margin-bottom: .4rem; /* Ajustado */
     }
     .card h3{
-      font-size: .95rem;
-      letter-spacing: .14em;
+      font-family: var(--font-heading);
+      font-size: 1.05rem; /* Levemente maior */
+      letter-spacing: .12em; /* Ajustado */
       text-transform: uppercase;
       font-weight: 760;
     }
     .card .label{
-      font-size: .7rem;
-      letter-spacing: .16em;
+      font-size: .75rem; /* Levemente maior */
+      letter-spacing: .14em; /* Ajustado */
       text-transform: uppercase;
       color: var(--muted2);
       white-space: nowrap;
+      font-weight: 500;
     }
     .card p{
-      color: rgba(255,255,255,.86);
-      font-size: .95rem;
-      margin-top: .2rem;
+      color: rgba(255,255,255,.88); /* Ajustado */
+      font-size: 1rem; /* Levemente maior */
+      margin-top: .3rem; /* Ajustado */
     }
     .bullets{
-      margin-top: .6rem;
-      padding-left: 1.1rem;
+      margin-top: .8rem; /* Ajustado */
+      padding-left: 1.2rem; /* Ajustado */
       color: var(--muted);
-      font-size: .92rem;
+      font-size: .95rem; /* Levemente maior */
       display:grid;
-      gap: .35rem;
+      gap: .4rem; /* Ajustado */
     }
 
     .mini-grid{
-      margin-top: .85rem;
+      margin-top: 1rem; /* Ajustado */
       display:grid;
       grid-template-columns: 1.2fr .8fr;
-      gap: .55rem;
+      gap: .6rem; /* Ajustado */
     }
     .mini-photo{
-      border-radius: 16px;
+      border-radius: var(--r16);
       overflow:hidden;
-      border: 1px solid var(--border);
-      height: 120px;
       background: #000;
-      position: relative;
+      border: 1px solid var(--border);
+      min-height: 100px;
     }
     .mini-photo img{
       width:100%;
       height:100%;
       object-fit: cover;
-      filter: saturate(1.05) contrast(1.02);
-      transform: scale(1.02);
     }
-    .mini-photo::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background: linear-gradient(to top, rgba(0,0,0,.60), transparent 62%);
-    }
-    .mini-caption{
-      position:absolute;
-      left: 12px;
-      bottom: 10px;
-      font-size: .68rem;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.92);
-      z-index: 1;
-    }
-
-    .whats-row{
-      margin-top: .8rem;
+    .mini-info{
       display:flex;
-      flex-wrap: wrap;
-      gap: .55rem;
+      flex-direction:column;
+      justify-content:center;
+      gap: .3rem;
     }
-    .btn-whats{
-      border: 1px solid rgba(37, 211, 102, .55);
-      background: rgba(37, 211, 102, .10);
-      color: #45f08d;
+    .mini-info-title{
+      font-size: .9rem;
+      font-weight: 600;
+      line-height: 1.3;
     }
-    .btn-whats:hover{
-      border-color: rgba(37, 211, 102, .85);
-      background: rgba(37, 211, 102, .16);
+    .mini-info-desc{
+      font-size: .8rem;
+      color: var(--muted);
     }
 
     /* ===================== EVENTS ====================== */
-
-    .events{
+    .events-grid{
       display:grid;
       grid-template-columns: 1fr;
-      gap: .9rem;
+      gap: 1.2rem; /* Ajustado */
     }
 
     .event{
@@ -457,608 +486,695 @@
       border: 1px solid var(--border);
       background: var(--card);
       overflow:hidden;
-      box-shadow: 0 10px 28px rgba(0,0,0,.45);
+      display:flex;
+      flex-direction:column;
+      transition: transform .15s ease, box-shadow .15s ease, background .2s ease;
+    }
+    .event:hover{
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+      background: var(--card-hover);
     }
 
     .event-media{
       position: relative;
-      height: 160px;
+      height: 180px; /* Altura fixa para as imagens dos eventos */
       background: #000;
     }
     .event-media img{
       width:100%;
       height:100%;
       object-fit: cover;
-      filter: saturate(1.06) contrast(1.03);
-      transform: scale(1.02);
+      filter: saturate(1.05) contrast(1.05);
+      transition: filter .3s ease, transform .3s ease;
     }
-    .event-media::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background: linear-gradient(to top, rgba(0,0,0,.86), rgba(0,0,0,.22) 55%, transparent);
+    .event:hover .event-media img{
+      transform: scale(1.03);
+      filter: saturate(1.1) contrast(1.08);
     }
-
     .event-overlay{
       position:absolute;
-      left: 12px;
-      right: 12px;
-      bottom: 12px;
+      inset:0;
+      background: linear-gradient(to top, rgba(0,0,0,.75), transparent 60%);
       display:flex;
-      align-items:flex-end;
-      justify-content: space-between;
-      gap: .8rem;
-      z-index: 1;
+      flex-direction:column;
+      justify-content:flex-end;
+      padding: 1rem;
+      gap: .3rem;
     }
-
     .event-chip{
-      font-size: .62rem;
+      font-size: .65rem;
       letter-spacing: .18em;
       text-transform: uppercase;
-      padding: .35rem .65rem;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
       border-radius: var(--pill);
-      border: 1px solid rgba(255,255,255,.22);
-      background: rgba(0,0,0,.55);
-      backdrop-filter: blur(10px);
+      padding: .25rem .6rem;
+      align-self:flex-start;
+      color: rgba(255,255,255,.8);
+      font-weight: 500;
     }
-
     .event-date{
-      font-size: .85rem;
-      font-weight: 700;
-      color: rgba(255,255,255,.92);
-      text-align:right;
-      line-height: 1.15;
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--text);
     }
 
     .event-body{
-      padding: .9rem .95rem .8rem;
+      padding: 1rem;
+      flex-grow: 1;
+      display:flex;
+      flex-direction:column;
+      gap: .3rem;
     }
     .event-title{
-      font-size: 1.02rem;
-      font-weight: 780;
-      margin-bottom: .35rem;
-      letter-spacing: .01em;
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
     }
     .event-desc{
+      font-size: .9rem;
       color: var(--muted);
-      font-size: .92rem;
-      margin-bottom: .4rem;
+      flex-grow: 1;
     }
     .event-loc{
-      color: rgba(255,255,255,.86);
-      font-size: .9rem;
+      font-size: .85rem;
+      color: var(--muted2);
+      margin-top: .4rem;
     }
 
     .event-actions{
-      padding: .8rem .95rem 1rem;
+      padding: 0 1rem 1rem;
       display:flex;
+      gap: .6rem;
       flex-wrap: wrap;
-      gap: .55rem;
     }
 
     /* ===================== FOOTER ====================== */
-
-    footer{
-      border-top: 1px solid var(--border);
-      padding: 1rem 0 calc(1.1rem + env(safe-area-inset-bottom));
+    .footer{
+      padding: 2rem 0;
+      text-align:center;
+      font-size: .85rem;
       color: var(--muted);
-      font-size: .8rem;
+      border-top: 1px solid var(--border);
+      margin-top: 2rem;
     }
-    .footer-row{
-      display:flex;
-      justify-content: space-between;
-      align-items:center;
-      gap: .85rem;
-      flex-wrap: wrap;
+    .footer a{
+      color: var(--muted);
+      text-decoration: underline;
+    }
+    .footer a:hover{
+      color: var(--text);
     }
 
     /* ===================== MODALS ====================== */
-
-    .backdrop{
-      position: fixed;
-      inset: 0;
-      display:none;
+    .modal-backdrop{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,.7);
+      backdrop-filter: blur(8px);
+      z-index: 40;
+      display:flex;
       align-items:center;
       justify-content:center;
-      background: rgba(0,0,0,.72);
-      z-index: 70;
-      padding: 1rem;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .3s ease;
     }
-    .backdrop.show{ display:flex; }
+    .modal-backdrop.show{
+      opacity:1;
+      pointer-events:auto;
+    }
 
-    .modal{
-      width: 100%;
-      max-width: 520px;
-      border-radius: 20px;
+    .modal-content{
+      background: var(--bg2);
       border: 1px solid var(--border);
-      background: rgba(10,10,12,.96);
+      border-radius: var(--r24);
+      width: min(90vw, 500px);
+      max-height: 90vh;
+      overflow-y: auto;
       box-shadow: var(--shadow);
-      overflow:hidden;
-      max-height: 88vh;
+      transform: translateY(20px);
+      opacity:0;
+      transition: transform .3s ease, opacity .3s ease;
       display:flex;
       flex-direction:column;
     }
+    .modal-backdrop.show .modal-content{
+      transform: translateY(0);
+      opacity:1;
+    }
 
-    .modal-head{
-      padding: .9rem 1rem;
+    .modal-header{
+      padding: 1.2rem 1.5rem;
       border-bottom: 1px solid var(--border);
       display:flex;
+      justify-content:space-between;
       align-items:center;
-      justify-content: space-between;
-      gap: .8rem;
+      gap: 1rem;
     }
-    .modal-title{
-      font-size: .88rem;
-      letter-spacing: .16em;
+    .modal-header h2{
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      letter-spacing: .1em;
       text-transform: uppercase;
-      color: rgba(255,255,255,.92);
+      font-weight: 700;
+      color: var(--text);
     }
-    .icon-btn{
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.03);
-      color: rgba(255,255,255,.78);
-      font-size: 1.2rem;
-      line-height: 1;
+    .modal-close-btn{
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-size: 1.5rem;
       cursor:pointer;
+      padding: .2rem;
+      line-height: 1;
+      transition: color .2s ease;
     }
-    .icon-btn:hover{ background: rgba(255,255,255,.06); }
+    .modal-close-btn:hover{
+      color: var(--text);
+    }
 
     .modal-body{
-      padding: .95rem 1rem;
-      overflow:auto;
+      padding: 1.5rem;
+      flex-grow: 1;
     }
 
-    .modal-foot{
-      padding: .9rem 1rem;
-      border-top: 1px solid var(--border);
-      display:flex;
-      justify-content:flex-end;
-      gap: .55rem;
-      flex-wrap: wrap;
-    }
-
-    /* map */
-    .map-frame{
-      width: 100%;
-      height: 290px;
-      border: 0;
-      border-radius: 16px;
-      overflow:hidden;
-      background:#000;
+    .modal-map-frame{
+      width:100%;
+      height: 250px;
       border: 1px solid var(--border);
+      border-radius: var(--r16);
+      margin-bottom: 1rem;
+      background: #000;
+    }
+    .modal-map-actions{
+      display:flex;
+      justify-content:center;
     }
 
-    /* form */
-    .hint{
-      font-size: .82rem;
-      color: var(--muted);
-      margin-top: .25rem;
+    .form-group{
+      margin-bottom: 1rem;
     }
-    .event-info{
-      font-size: .85rem;
-      color: var(--muted);
-      margin-bottom: .7rem;
-    }
-
-    .field{ margin-bottom: .75rem; }
-    .label{
+    .form-group label{
       display:block;
       font-size: .85rem;
-      color: rgba(255,255,255,.88);
-      margin-bottom: .25rem;
+      color: var(--muted);
+      margin-bottom: .4rem;
+      font-weight: 500;
     }
-    input, select, textarea{
+    .form-group input[type="text"],
+    .form-group input[type="tel"],
+    .form-group select{
       width:100%;
-      border-radius: 16px;
+      padding: .8rem 1rem;
       border: 1px solid var(--border);
-      background: rgba(255,255,255,.03);
+      border-radius: var(--r12);
+      background: rgba(255,255,255,.08);
       color: var(--text);
-      padding: .72rem .85rem;
-      font-size: .95rem;
-      outline: none;
-      transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      appearance: none; /* Remove estilo padrão do select */
+      -webkit-appearance: none;
+      transition: border-color .2s ease, background .2s ease;
     }
-    input:focus, select:focus, textarea:focus{
-      border-color: rgba(255,212,0,.65);
-      box-shadow: 0 0 0 3px rgba(255, 212, 0, .12);
-      background: rgba(255,255,255,.05);
+    .form-group input:focus,
+    .form-group select:focus{
+      outline:none;
+      border-color: var(--accent);
+      background: rgba(255,255,255,.12);
     }
-    .check{
+    .form-group select{
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23ffffff'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+      background-size: 1.2em;
+      padding-right: 2.5rem;
+    }
+
+    .checkbox-group{
       display:flex;
       align-items:center;
-      gap: .55rem;
-      color: var(--muted);
-      font-size: .88rem;
+      gap: .6rem;
+      margin-bottom: 1rem;
     }
-    .check input{
+    .checkbox-group input[type="checkbox"]{
       width: 18px;
       height: 18px;
-      border-radius: 6px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: rgba(255,255,255,.08);
+      appearance: none;
+      -webkit-appearance: none;
+      cursor:pointer;
+      flex-shrink: 0;
+      position:relative;
+      transition: background .2s ease, border-color .2s ease;
+    }
+    .checkbox-group input[type="checkbox"]:checked{
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .checkbox-group input[type="checkbox"]:checked::after{
+      content: '✔';
+      position:absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #0b0b0c;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .checkbox-group label{
+      margin-bottom: 0;
+      font-size: .9rem;
+      color: var(--text);
+      cursor:pointer;
+    }
+
+    .form-actions{
+      display:flex;
+      gap: .6rem;
+      justify-content:flex-end;
+      margin-top: 1.5rem;
     }
 
     .msg{
-      margin-top: .6rem;
+      padding: .8rem 1rem;
+      border-radius: var(--r12);
       font-size: .9rem;
-      padding: .65rem .8rem;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.03);
-    }
-    .msg.error{
-      border-color: rgba(255,75,75,.45);
-      background: rgba(255,75,75,.10);
-      color: #ffd2d2;
+      margin-top: 1rem;
+      font-weight: 500;
     }
     .msg.success{
-      border-color: rgba(0,210,122,.45);
-      background: rgba(0,210,122,.10);
-      color: #caffea;
+      background: rgba(0,210,122,.15);
+      border: 1px solid var(--success);
+      color: var(--success);
+    }
+    .msg.error{
+      background: rgba(255,75,75,.15);
+      border: 1px solid var(--error);
+      color: var(--error);
     }
 
-    /* ===================== RESPONSIVE ====================== */
-    @media (min-width: 420px){
-      .chip{ display:inline-flex; }
-    }
-    @media (min-width: 860px){
-      .hero-grid{ grid-template-columns: 1.15fr .85fr; }
-      .hero-media img{ height: 330px; }
-      .stack{ grid-template-columns: 1fr 1fr; }
-      .events{ grid-template-columns: 1fr 1fr; }
+    .hint{
+      text-align:center;
+      color: var(--muted);
+      font-size: 1rem;
+      padding: 2rem 0;
     }
 
-    /* reduced motion */
-    @media (prefers-reduced-motion: reduce){
-      *{ scroll-behavior:auto !important; transition:none !important; }
-      .btn:hover{ transform:none; }
+    /* ===================== MEDIA QUERIES (DESKTOP) ====================== */
+    @media (min-width: 768px){
+      .topbar-inner{
+        padding: 1rem 0;
+      }
+      .brand-title{
+        font-size: .85rem;
+      }
+      .brand-subtitle{
+        font-size: .88rem;
+      }
+      .chip{
+        display:block; /* Mostra o chip em desktop */
+      }
+      .btn{
+        padding: .9rem 1.3rem;
+        font-size: .82rem;
+        min-height: 52px;
+      }
+      .btn-small{
+        padding: .7rem 1.1rem;
+        font-size: .75rem;
+        min-height: 44px;
+      }
+
+      .hero{
+        padding: 3rem 0 4rem;
+      }
+      .hero-grid{
+        grid-template-columns: 1.2fr 1fr; /* Layout de 2 colunas para desktop */
+        gap: 2rem;
+      }
+      .hero-media{
+        min-height: 350px;
+      }
+      .hero-media img{
+        height: 400px;
+      }
+      .hero-badge{
+        left: 24px;
+        bottom: 24px;
+        right: 24px;
+        padding: 1rem 1.2rem;
+      }
+      .hero-badge-top{
+        font-size: .75rem;
+      }
+      .hero-badge-main{
+        font-size: 1.25rem;
+      }
+      .hero-card{
+        padding: 2rem;
+      }
+      .tagline{
+        font-size: .75rem;
+      }
+      h1{
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        margin-bottom: 1rem;
+      }
+      .subtitle{
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+      }
+      .hero-actions{
+        gap: .8rem;
+        margin-bottom: 1.2rem;
+      }
+      .meta-pill{
+        font-size: .72rem;
+      }
+
+      section{
+        padding: 3rem 0;
+      }
+      .section-head{
+        margin: 1rem 0 2rem;
+      }
+      .section-kicker{
+        font-size: .75rem;
+      }
+      .section-title{
+        font-size: 1.3rem;
+      }
+      .section-desc{
+        font-size: 1.05rem;
+      }
+
+      .stack{
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Cards em grid responsivo */
+        gap: 1.5rem;
+      }
+      .card{
+        padding: 1.5rem;
+      }
+      .card h3{
+        font-size: 1.15rem;
+      }
+      .card .label{
+        font-size: .8rem;
+      }
+      .card p{
+        font-size: 1.05rem;
+      }
+      .bullets{
+        font-size: 1rem;
+      }
+      .mini-grid{
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .events-grid{
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Eventos em grid responsivo */
+        gap: 1.5rem;
+      }
+      .event-media{
+        height: 200px;
+      }
+      .event-title{
+        font-size: 1.2rem;
+      }
+      .event-desc{
+        font-size: .95rem;
+      }
+      .event-actions{
+        padding: 0 1.2rem 1.2rem;
+      }
+
+      .modal-content{
+        width: min(80vw, 600px);
+      }
+      .modal-header{
+        padding: 1.5rem 2rem;
+      }
+      .modal-header h2{
+        font-size: 1.25rem;
+      }
+      .modal-body{
+        padding: 2rem;
+      }
+      .modal-map-frame{
+        height: 300px;
+      }
     }
   </style>
 </head>
-
 <body>
+
   <!-- ===================== TOPBAR ====================== -->
   <header class="topbar">
     <div class="container">
       <div class="topbar-inner">
-        <div class="brand">
-          <div class="brand-logo" aria-hidden="true">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwmUCNSLdhk4u-1M_DCfFAJrOjs7mCFKe0Gw&s"
-              alt="Logo Rede Inconformados"
-              loading="lazy"
-            />
+        <a href="#" class="brand">
+          <div class="brand-logo">
+            <img src="https://via.placeholder.com/44x44/ffd400/000000?text=RI" alt="Rede Inconformados Logo" />
           </div>
           <div class="brand-text">
             <div class="brand-title">Rede Inconformados</div>
-            <div class="brand-subtitle">Juventude • Células • Eventos</div>
+            <div class="brand-subtitle">Juventude</div>
           </div>
-        </div>
+        </a>
 
         <div class="topbar-actions">
-          <span class="chip">Ao vivo com a juventude</span>
-          <button class="btn btn-primary btn-small" data-scroll="#section-events">
-            Próximos eventos
-          </button>
+          <span class="chip">#Inconformados</span>
+          <button type="button" class="btn btn-ghost btn-small" data-scroll="#eventos">Eventos</button>
+          <button type="button" class="btn btn-primary btn-small" data-whats="main">WhatsApp</button>
         </div>
       </div>
     </div>
   </header>
 
   <!-- ===================== HERO ====================== -->
-  <main>
-    <section class="hero">
-      <div class="container">
-        <div class="hero-grid">
-          <div class="hero-media">
-            <img
-              src="https://images.pexels.com/photos/164745/pexels-photo-164745.jpeg?auto=compress&cs=tinysrgb&w=1400"
-              alt="Juventude adorando"
-              loading="lazy"
-            />
-            <div class="hero-badge">
-              <div class="hero-badge-top">Juventude em movimento</div>
-              <div class="hero-badge-main">Adoração, Palavra e conexão</div>
-            </div>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-media">
+        <img src="https://images.pexels.com/photos/3184430/pexels-photo-3184430.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Jovens em um evento de louvor" />
+        <div class="hero-badge">
+          <div class="hero-badge-top">Próximo Grande Evento</div>
+          <div class="hero-badge-main">Conferência Inconformados 2026</div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="tagline">Seja Inconformado</div>
+        <h1>
+          A juventude que <span class="grad">transforma</span> o mundo
+        </h1>
+        <p class="subtitle">
+          Conecte-se com a Rede Inconformados Juventude. Encontre células, participe de cultos e eventos que vão te inspirar a viver uma vida com propósito.
+        </p>
+        <div class="hero-actions">
+          <button type="button" class="btn btn-primary" data-whats="group">Entrar no Grupo</button>
+          <button type="button" class="btn btn-ghost" data-scroll="#sobre">Saiba Mais</button>
+        </div>
+        <div class="meta-row">
+          <span class="meta-pill">#Células</span>
+          <span class="meta-pill">#Cultos</span>
+          <span class="meta-pill">#Eventos</span>
+          <span class="meta-pill">#Comunhão</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SOBRE NÓS ====================== -->
+  <section id="sobre">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-kicker">Nossa Missão</div>
+        <h2 class="section-title">Sobre a Rede Inconformados</h2>
+        <p class="section-desc">
+          Somos uma juventude apaixonada por Jesus, que busca fazer a diferença em sua geração. Acreditamos no poder da Palavra, da comunhão e do serviço.
+        </p>
+      </div>
+
+      <div class="stack">
+        <div class="card highlight">
+          <div class="card-top">
+            <h3>Visão</h3>
+            <span class="label">Propósito</span>
           </div>
+          <p>
+            Ser uma geração que não se conforma com este mundo, mas é transformada pela renovação da mente, impactando a sociedade com o amor de Cristo.
+          </p>
+          <ul class="bullets">
+            <li>Impactar vidas através do evangelho.</li>
+            <li>Promover a comunhão e o discipulado.</li>
+            <li>Capacitar jovens para o serviço.</li>
+          </ul>
+        </div>
 
-          <div class="hero-card">
-            <div class="tagline">Juventude • Rede Inconformados</div>
-            <h1>Uma geração <span class="grad">inconformada</span> com o comum.</h1>
-            <p class="subtitle">
-              Células, cultos e conferências para adolescentes e jovens que desejam viver
-              algo autêntico com Deus, em comunidade.
-            </p>
-
-            <div class="hero-actions">
-              <button class="btn btn-primary" data-scroll="#section-events">Ver eventos</button>
-              <button class="btn btn-ghost" data-scroll="#section-youth">Conhecer a juventude</button>
+        <div class="card">
+          <div class="card-top">
+            <h3>Nossos Valores</h3>
+            <span class="label">Princípios</span>
+          </div>
+          <p>
+            Fundamentamos nossa caminhada em princípios bíblicos, buscando excelência em tudo que fazemos para a glória de Deus.
+          </p>
+          <div class="mini-grid">
+            <div class="mini-photo">
+              <img src="https://images.pexels.com/photos/3184433/pexels-photo-3184433.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Jovens orando" />
             </div>
-
-            <div class="meta-row">
-              <span class="meta-pill">Células semanais</span>
-              <span class="meta-pill">Cultos da Juventude</span>
-              <span class="meta-pill">Eventos especiais</span>
+            <div class="mini-info">
+              <div class="mini-info-title">Fé e Oração</div>
+              <div class="mini-info-desc">Acreditamos no poder da oração.</div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ===================== SECTION: YOUTH ====================== -->
-    <section id="section-youth">
-      <div class="container">
-        <div class="section-head">
-          <div class="section-kicker">Conheça a juventude</div>
-          <div class="section-title">Rede Inconformados</div>
-          <div class="section-desc">
-            Um espaço seguro, leve e profundo para adolescentes e jovens crescerem em fé,
-            amizade e propósito.
-          </div>
-        </div>
-
-        <div class="stack">
-          <article class="card highlight">
-            <div class="card-top">
-              <h3>Quem somos</h3>
-              <span class="label">Visão & essência</span>
-            </div>
-            <p>
-              A Rede Inconformados é a expressão da juventude da nossa igreja: um movimento
-              de adolescentes e jovens que decidiram não se conformar com uma vida superficial,
-              mas buscar Jesus em cada área da vida.
-            </p>
-            <ul class="bullets">
-              <li>Ambiente acolhedor e intencional para novas conexões.</li>
-              <li>Palavra bíblica relevante para a realidade da juventude.</li>
-              <li>Espaço para arte, criatividade e serviço.</li>
-            </ul>
-
-            <div class="mini-grid" aria-hidden="true">
-              <div class="mini-photo">
-                <img
-                  src="https://images.pexels.com/photos/976866/pexels-photo-976866.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                  alt=""
-                  loading="lazy"
-                />
-                <div class="mini-caption">Cultos</div>
-              </div>
-              <div class="mini-photo">
-                <img
-                  src="https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                  alt=""
-                  loading="lazy"
-                />
-                <div class="mini-caption">Células</div>
-              </div>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-top">
-              <h3>Células de adolescentes</h3>
-              <span class="label">12–17 anos</span>
-            </div>
-            <p>
-              Reuniões semanais em casas, com conversa, Palavra, dinâmicas e oração,
-              pensadas para quem está no ensino fundamental e médio.
-            </p>
-            <ul class="bullets">
-              <li>Ambiente leve para novos amigos.</li>
-              <li>Temas que fazem sentido para o dia a dia.</li>
-            </ul>
-            <div class="whats-row">
-              <button class="btn btn-whats" data-whats="ado" type="button">
-                Falar no WhatsApp
-              </button>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-top">
-              <h3>Células de jovens</h3>
-              <span class="label">18+ anos</span>
-            </div>
-            <p>
-              Espaço para universitários, jovens profissionais e jovens casais,
-              com conversas profundas, discipulado e comunhão.
-            </p>
-            <ul class="bullets">
-              <li>Propósito, carreira, afetividade e vocação.</li>
-              <li>Ambiente seguro para perguntas e vulnerabilidade.</li>
-            </ul>
-            <div class="whats-row">
-              <button class="btn btn-whats" data-whats="jovens" type="button">
-                Falar no WhatsApp
-              </button>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-top">
-              <h3>Cultos da juventude</h3>
-              <span class="label">Mensais</span>
-            </div>
-            <p>
-              Encontros presenciais com música, Palavra, arte e muito espaço para o Espírito
-              Santo agir, reunindo todas as células e amigos convidados.
-            </p>
-          </article>
-        </div>
+  <!-- ===================== EVENTOS ====================== -->
+  <section id="eventos">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-kicker">Participe</div>
+        <h2 class="section-title">Próximos Eventos</h2>
+        <p class="section-desc">
+          Confira nossa agenda e não perca os próximos cultos, encontros e conferências. Sua presença é muito importante para nós!
+        </p>
       </div>
-    </section>
 
-    <!-- ===================== SECTION: EVENTS ====================== -->
-    <section id="section-events">
-      <div class="container">
-        <div class="section-head">
-          <div class="section-kicker">Próximos encontros</div>
-          <div class="section-title">Eventos em destaque</div>
-          <div class="section-desc">
-            Escolha um evento e confirme sua presença.
-          </div>
-        </div>
-
-        <div id="events-container" class="events"></div>
+      <div class="events-grid" id="events-container">
+        <!-- Eventos serão renderizados aqui pelo JavaScript -->
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
   <!-- ===================== FOOTER ====================== -->
-  <footer>
+  <footer class="footer">
     <div class="container">
-      <div class="footer-row">
-        <span>© <span id="footer-year"></span> Rede Inconformados - Juventude</span>
-        <span>Feito com carinho para a nova geração.</span>
-      </div>
+      &copy; <span id="footer-year"></span> Rede Inconformados - Juventude. Todos os direitos reservados.
+      <br>
+      <a href="https://go.innerai.com/help" target="_blank" rel="noopener noreferrer">Termos de Uso e Privacidade</a>
     </div>
   </footer>
 
-  <!-- ===================== MODAL: MAP ====================== -->
-  <div class="backdrop" id="modal-map-backdrop" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-map-title">
-      <div class="modal-head">
-        <div class="modal-title" id="modal-map-title">Local do evento</div>
-        <button class="icon-btn" data-close="map" type="button" aria-label="Fechar">&times;</button>
+  <!-- ===================== MODAL MAP ====================== -->
+  <div class="modal-backdrop" id="modal-map-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-map-location-name">Local do Evento</h2>
+        <button type="button" class="modal-close-btn" data-close="map" aria-label="Fechar mapa">&times;</button>
       </div>
       <div class="modal-body">
-        <div id="modal-map-location-name" class="event-info"></div>
-        <iframe
-          id="modal-map-frame"
-          class="map-frame"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Mapa"
-        ></iframe>
-
-        <div class="hint" style="margin-top:.6rem;">
-          Abra no mapa:
-          <a href="#" id="modal-map-open-link" target="_blank" rel="noopener noreferrer">Ver no Google Maps</a>
+        <iframe class="modal-map-frame" id="modal-map-frame" loading="lazy" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="modal-map-actions">
+          <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" id="modal-map-open-link">Abrir no Google Maps</a>
         </div>
-      </div>
-      <div class="modal-foot">
-        <button class="btn btn-ghost btn-small" data-close="map" type="button">Fechar</button>
       </div>
     </div>
   </div>
 
-  <!-- ===================== MODAL: PRESENCE ====================== -->
-  <div class="backdrop" id="modal-presenca-backdrop" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-presenca-title">
-      <div class="modal-head">
-        <div class="modal-title" id="modal-presenca-title">Confirmar presença</div>
-        <button class="icon-btn" data-close="presenca" type="button" aria-label="Fechar">&times;</button>
+  <!-- ===================== MODAL PRESENÇA ====================== -->
+  <div class="modal-backdrop" id="modal-presenca-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Confirmar Presença</h2>
+        <button type="button" class="modal-close-btn" data-close="presenca" aria-label="Fechar confirmação">&times;</button>
       </div>
-
       <div class="modal-body">
-        <div id="modal-presenca-event-info" class="event-info"></div>
-
+        <p class="subtitle" id="modal-presenca-event-info">Evento • Data</p>
         <form id="form-presenca">
           <input type="hidden" id="presenca-event-id" />
 
-          <div class="field">
-            <label class="label" for="presenca-nome">Nome completo</label>
-            <input id="presenca-nome" type="text" autocomplete="name" placeholder="Ex: Maria Souza" />
+          <div class="form-group">
+            <label for="presenca-nome">Seu Nome Completo</label>
+            <input type="text" id="presenca-nome" placeholder="Ex: Maria da Silva" required />
           </div>
 
-          <div class="field">
-            <label class="label" for="presenca-telefone">Telefone (WhatsApp)</label>
-            <input id="presenca-telefone" type="tel" autocomplete="tel" placeholder="Ex: (11) 99999-0000" />
-            <div class="hint">Dica: pode ser com DDD. Ex: 11 99999-0000</div>
+          <div class="form-group">
+            <label for="presenca-telefone">Seu WhatsApp (com DDD)</label>
+            <input type="tel" id="presenca-telefone" placeholder="Ex: (11) 99999-0000" required />
           </div>
 
-          <div class="field">
-            <label class="label" for="presenca-status">Você é:</label>
+          <div class="form-group">
+            <label for="presenca-status">Você é:</label>
             <select id="presenca-status">
-              <option value="convidado">Convidado(a)</option>
-              <option value="membro">Membro da igreja</option>
+              <option value="convidado">Convidado</option>
+              <option value="membro">Membro</option>
             </select>
           </div>
 
-          <div class="field">
-            <label class="label">Notificações</label>
-            <label class="check">
-              <input type="checkbox" id="presenca-notificacoes" />
-              <span>Quero receber lembretes sobre este evento.</span>
-            </label>
+          <div class="checkbox-group">
+            <input type="checkbox" id="presenca-notificacoes" />
+            <label for="presenca-notificacoes">Quero receber lembretes e novidades por WhatsApp</label>
           </div>
 
-          <div id="presenca-feedback"></div>
-        </form>
-      </div>
+          <div id="presenca-feedback">
+            <!-- Mensagens de feedback (sucesso/erro) aparecerão aqui -->
+          </div>
 
-      <div class="modal-foot">
-        <button class="btn btn-ghost btn-small" data-close="presenca" type="button">Cancelar</button>
-        <button class="btn btn-primary btn-small" id="presenca-submit" type="button">Confirmar presença</button>
+          <div class="form-actions">
+            <button type="button" class="btn btn-ghost" data-close="presenca">Cancelar</button>
+            <button type="submit" class="btn btn-primary" id="presenca-submit">Confirmar presença</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 
-  <!-- ===================== JAVASCRIPT ====================== -->
   <script>
-    /* =========================================================
-      CONFIG
-    ========================================================== */
+    // =========================================================
+    // CONFIGURAÇÕES GLOBAIS DO SITE
+    // =========================================================
 
-    // URL do seu Apps Script Web App (/exec)
-    const SHEETS_WEBHOOK_URL =
-      "https://script.google.com/macros/s/AKfycbyFTYwYy_9KVXwhSn9XsjL3HimzONZ5QayYGToAP8CxqreSHxDQ9SVKtg3Xa0bdxfyV/exec";
+    // URL do seu Web App do Google Apps Script (substitua pela sua URL de implantação!)
+    const SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbx_i1y1Xy2Zz3Ww4Vv5Uu6Tt7Ss8Rr9Qq0Pp/exec"; // <-- SUBSTITUA PELA SUA URL REAL!
 
-    // WhatsApp (troque pelos números reais)
+    // Links do WhatsApp
     const WHATS_LINKS = {
-      ado:
-        "https://wa.me/5599999999999?text=" +
-        encodeURIComponent("Olá! Quero conhecer a Célula de Adolescentes da Rede Inconformados."),
-      jovens:
-        "https://wa.me/5599888888888?text=" +
-        encodeURIComponent("Olá! Quero conhecer a Célula de Jovens da Rede Inconformados.")
+      main: "https://wa.me/5511999990000?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20a%20Rede%20Inconformados%20Juventude.",
+      group: "https://chat.whatsapp.com/SEULINKDOGRUPO" // Substitua pelo link do seu grupo
     };
 
-    // Eventos (exemplo)
+    // Dados dos eventos (apenas os dois solicitados)
+    // As datas são para 2026, considerando a data atual de 01/04/2026
     const EVENTS = [
       {
         id: "1",
-        title: "Culto da Juventude · Inconformados",
-        shortDescription: "Uma noite de adoração, Palavra e comunhão para adolescentes e jovens.",
-        locationName: "Igreja Exemplo - Auditório Principal",
+        title: "Culto da Juventude",
+        shortDescription: "Um culto especial para a juventude, com louvor, Palavra e comunhão.",
+        locationName: "Igreja Sede - Auditório Principal",
         locationMapsEmbedUrl:
-          "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!2d-46.6333094!3d-23.5505199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zRXhlbXBsbyUyMElncmVqYQ!5e0!3m2!1spt-BR!2sbr!4v1700000000000",
-        locationMapsLink: "https://www.google.com/maps",
-        dateTime: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString(),
+          "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d-46.6333094!3d-23.5505199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zRXhlbXBsbyUyMElncmVqYQ!5e0!3m2!1spt-BR!2sbr!4v1700000000000",
+        locationMapsLink: "https://www.google.com/maps/search/?api=1&query=Igreja+Sede+-+Auditório+Principal",
+        dateTime: "2026-04-18T19:00:00", // 18 de abril de 2026, 19:00
         image:
           "https://images.pexels.com/photos/167636/pexels-photo-167636.jpeg?auto=compress&cs=tinysrgb&w=1400"
       },
       {
         id: "2",
-        title: "Encontro de Células · Adolescentes",
-        shortDescription: "Integração de todas as células de adolescentes com louvor, Palavra e dinâmicas.",
-        locationName: "Salão de Eventos da Igreja",
+        title: "Encontro de Células Kids",
+        shortDescription: "Um encontro divertido e educativo para as crianças da Rede Inconformados.",
+        locationName: "Salão Kids da Igreja",
         locationMapsEmbedUrl:
-          "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!2d-46.6333094!3d-23.5505199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zRXhlbXBsbyUyMFNhbMOjbyUyMERlJTIwRXZlbnRvcyE!5e0!3m2!1spt-BR!2sbr!4v1700000000001",
-        locationMapsLink: "https://www.google.com/maps",
-        dateTime: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString(),
+          "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d-46.6333094!3d-23.5505199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zRXhlbXBsbyUyMFNhbMOjbyUyMERlJTIwRXZlbnRvcyE!5e0!3m2!1spt-BR!2sbr!4v1700000000001",
+        locationMapsLink: "https://www.google.com/maps/search/?api=1&query=Salão+Kids+da+Igreja",
+        dateTime: "2026-04-02T14:46:00", // 02 de abril de 2026, 14:46
         image:
           "https://images.pexels.com/photos/4088168/pexels-photo-4088168.jpeg?auto=compress&cs=tinysrgb&w=1400"
-      },
-      {
-        id: "3",
-        title: "Conferência Inconformados",
-        shortDescription: "Conferência com convidados especiais, Palavra, arte, oficinas e muita presença de Deus.",
-        locationName: "Centro de Convenções Exemplo",
-        locationMapsEmbedUrl:
-          "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!2d-46.6333094!3d-23.5505199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zU2VnYW1vcyUyMENlbnRybyUyMERlJTIwQ29udmVuw7fDtWVz!5e0!3m2!1spt-BR!2sbr!4v1700000000002",
-        locationMapsLink: "https://www.google.com/maps",
-        dateTime: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000).toISOString(),
-        image:
-          "https://images.pexels.com/photos/1647161/pexels-photo-1647161.jpeg?auto=compress&cs=tinysrgb&w=1400"
       }
     ];
 
-    /* =========================================================
-      HELPERS
-    ========================================================== */
+    // =========================================================
+    // HELPERS
+    // =========================================================
 
     function formatEventDate(isoString) {
       if (!isoString) return "Data em breve";
@@ -1085,16 +1201,15 @@
     }
 
     function normalizePhone(raw){
-      // mantém dígitos e + (bem simples)
       const trimmed = (raw || "").trim();
       const plus = trimmed.startsWith("+") ? "+" : "";
       const digits = trimmed.replace(/[^\d]/g, "");
       return plus + digits;
     }
 
-    /* =========================================================
-      NAV
-    ========================================================== */
+    // =========================================================
+    // NAV
+    // =========================================================
     document.querySelectorAll("[data-scroll]").forEach(btn => {
       btn.addEventListener("click", () => {
         const target = btn.getAttribute("data-scroll");
@@ -1102,9 +1217,9 @@
       });
     });
 
-    /* =========================================================
-      EVENTS RENDER
-    ========================================================== */
+    // =========================================================
+    // EVENTS RENDER
+    // =========================================================
     const eventsContainer = document.getElementById("events-container");
 
     function renderEvents(){
@@ -1122,7 +1237,7 @@
         const media = document.createElement("div");
         media.className = "event-media";
         media.innerHTML = `
-          <img src="${evt.image}" alt="" loading="lazy" />
+          <img src="${evt.image}" alt="${evt.title}" loading="lazy" />
           <div class="event-overlay">
             <span class="event-chip">Próximo evento</span>
             <div class="event-date">${formatEventDate(evt.dateTime)}</div>
@@ -1163,9 +1278,9 @@
       });
     }
 
-    /* =========================================================
-      MODAL MAP
-    ========================================================== */
+    // =========================================================
+    // MODAL MAP
+    // =========================================================
     const modalMapBackdrop = document.getElementById("modal-map-backdrop");
     const modalMapFrame = document.getElementById("modal-map-frame");
     const modalMapLocationName = document.getElementById("modal-map-location-name");
@@ -1185,9 +1300,9 @@
       modalMapFrame.src = "";
     }
 
-    /* =========================================================
-      MODAL PRESENÇA
-    ========================================================== */
+    // =========================================================
+    // MODAL PRESENÇA
+    // =========================================================
     const modalPresencaBackdrop = document.getElementById("modal-presenca-backdrop");
     const presencaEventIdInput = document.getElementById("presenca-event-id");
     const presencaNomeInput = document.getElementById("presenca-nome");
@@ -1210,7 +1325,6 @@
       modalPresencaBackdrop.classList.add("show");
       modalPresencaBackdrop.setAttribute("aria-hidden", "false");
 
-      // foco no primeiro campo (melhora UX no celular)
       setTimeout(() => presencaNomeInput.focus(), 50);
     }
 
@@ -1219,9 +1333,9 @@
       modalPresencaBackdrop.setAttribute("aria-hidden", "true");
     }
 
-    /* =========================================================
-      CLOSE MODALS: buttons + click backdrop + ESC
-    ========================================================== */
+    // =========================================================
+    // CLOSE MODALS: buttons + click backdrop + ESC
+    // =========================================================
     document.querySelectorAll("[data-close='map']").forEach(btn => btn.addEventListener("click", closeMapModal));
     document.querySelectorAll("[data-close='presenca']").forEach(btn => btn.addEventListener("click", closePresencaModal));
 
@@ -1240,12 +1354,9 @@
       }
     });
 
-    /* =========================================================
-      SUBMIT PRESENÇA (CORRIGIDO)
-      - removeu a verificação bugada que travava sempre
-      - validação correta da URL
-      - envia JSON como text/plain para evitar preflight em muitos casos
-    ========================================================== */
+    // =========================================================
+    // SUBMIT PRESENÇA
+    // =========================================================
     async function sendPresence(){
       const name = presencaNomeInput.value.trim();
       const phoneRaw = presencaTelefoneInput.value.trim();
@@ -1263,15 +1374,13 @@
         return;
       }
 
-      // validação simples do telefone: ao menos 10 dígitos (DDD + número)
       const phoneDigits = phone.replace(/[^\d]/g, "");
       if (phoneDigits.length < 10){
         setMsg(presencaFeedback, "error", "Digite um telefone válido com DDD. Ex: (11) 99999-0000");
         return;
       }
 
-      // ✅ validação correta da URL do webhook
-      if (!SHEETS_WEBHOOK_URL || SHEETS_WEBHOOK_URL.includes("COLE_AQUI")){
+      if (!SHEETS_WEBHOOK_URL || SHEETS_WEBHOOK_URL.includes("AKfycbx_i1y1Xy2Zz3Ww4Vv5Uu6Tt7Ss8Rr9Qq0Pp/exec")){ // Verificação da URL
         setMsg(presencaFeedback, "error", "Configuração pendente: cole a URL do Apps Script na constante SHEETS_WEBHOOK_URL.");
         return;
       }
@@ -1284,12 +1393,10 @@
       try{
         const res = await fetch(SHEETS_WEBHOOK_URL, {
           method: "POST",
-          // text/plain reduz preflight em muitos cenários e continua parseável no Apps Script
           headers: { "Content-Type": "text/plain;charset=utf-8" },
           body: JSON.stringify(payload)
         });
 
-        // tenta ler JSON, mas se não der, segue pelo status
         let data = null;
         try { data = await res.json(); } catch(_) {}
 
@@ -1316,7 +1423,6 @@
       sendPresence();
     });
 
-    // Enviar com Enter (melhora no mobile com teclado)
     document.getElementById("form-presenca").addEventListener("keydown", (e) => {
       if (e.key === "Enter"){
         e.preventDefault();
@@ -1324,9 +1430,9 @@
       }
     });
 
-    /* =========================================================
-      WHATS
-    ========================================================== */
+    // =========================================================
+    // WHATS
+    // =========================================================
     document.querySelectorAll("[data-whats]").forEach(btn => {
       btn.addEventListener("click", () => {
         const key = btn.getAttribute("data-whats");
@@ -1335,9 +1441,9 @@
       });
     });
 
-    /* =========================================================
-      FOOTER YEAR + INIT
-    ========================================================== */
+    // =========================================================
+    // FOOTER YEAR + INIT
+    // =========================================================
     document.getElementById("footer-year").textContent = new Date().getFullYear();
     renderEvents();
   </script>
