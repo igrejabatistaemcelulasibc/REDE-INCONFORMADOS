@@ -1341,11 +1341,11 @@
         return;
       }
 
-      if (!SHEETS_WEBHOOK_URL || SHEETS_WEBHOOK_URL.includes("https://script.google.com/macros/s/AKfycbyFTYwYy_9KVXwhSn9XsjL3HimzONZ5QayYGToAP8CxqreSHxDQ9SVKtg3Xa0bdxfyV/exec")) {
-        presencaFeedback.innerHTML =
-          '<div class="form-error">Configuração do Apps Script pendente. Cole a URL na constante SHEETS_WEBHOOK_URL.</div>';
-        return;
-      }
+if (!SHEETS_WEBHOOK_URL || SHEETS_WEBHOOK_URL.includes("COLE_AQUI")) {
+  presencaFeedback.innerHTML =
+    '<div class="form-error">Configuração do Apps Script pendente. Cole a URL na constante SHEETS_WEBHOOK_URL.</div>';
+  return;
+}
 
       const payload = {
         eventId,
